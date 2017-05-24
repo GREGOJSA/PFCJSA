@@ -6,6 +6,7 @@ class usuarios (models.Model):
     user = models.TextField(max_length=15,null=True,blank=True,default='No configurado')
     nombre = models.TextField(max_length=15,null=True,blank=True,default='')
     apellido = models.TextField(max_length=15,null=True,blank=True,default='')
+    email = models.TextField(max_length=30,null=True,blank=True,default='')
     id_grado = models.IntegerField(null=True,blank=True,default='0')
 
 class grados (models.Model):
