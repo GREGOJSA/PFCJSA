@@ -13,7 +13,7 @@
         <form class="form-signin" role="form" method="post" id="form_login">
           {% csrf_token %}
           <h2 class="form-signin-heading">Acceso a SOPA</h2>
-          <input type="text" class="form-control" {{ form.username }}
+          <input type="text" class="form-control" name="Usuario" placeholder="Username" required="" {{ form.username }}
           <input type="password" class="form-control" name="password" placeholder="Password" required="" {{ form.password }}
           <br>
 
