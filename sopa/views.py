@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 #Importamos el formulario de autenticacion de django
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
+from django.contrib import auth
 
 
 class Login(FormView):
@@ -29,4 +30,9 @@ class Login(FormView):
         return super(Login, self).form_valid(form)
 
 def home(request):
-        return render(request, 'sopa/index.html')
+        print(request.user)
+        if str(request.user) == "Celia" :
+            auth.logout(request)
+            return HttpResponseRedirect("https://www.youtube.com/watch?v=tfJLGUnKoW0")
+        else:
+            return render(request, 'sopa/index.html')
