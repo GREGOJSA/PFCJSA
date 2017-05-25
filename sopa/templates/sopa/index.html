@@ -4,7 +4,7 @@
     <html>
         <hgroup>
           <h1>Sistema de Opinión sobre Prácticas para Alumnos</h1>
-          <h2>Infórmate sobre las prácticas en empresas que te interesam y ayuda a tus compañero con tu experiencia</h2>
+          <h2>Infórmate sobre las prácticas en empresas que te interesan y ayuda a tus compañero con tu experiencia</h2>
           <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
           <link rel="stylesheet" href="{% static 'css/sopa.css' %}">
         </hgroup>
@@ -16,6 +16,6 @@
             <li><a title="Opcion 4" href="#">Opción 4</a></li>
             <li><a title="Opcion 5" href="#">Opción 5</a></li>
           </ul>
-          <p>Welcome {{ user.username }} !!!</p> 
+          <p class="login_info">Logged in as <a title="Ir al perfil de {{ user.username }}" href="/users/{{ user.username }}">{{ user.username }}</a>,&nbsp;&nbsp;<a title="logout" href="/logout">logout</a></p>
         </nav>
     </html>

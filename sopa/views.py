@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 
-# Create your views here.
+
 class Login(FormView):
     #Establecemos la plantilla a utilizar
     template_name = 'sopa/login.html'
@@ -29,7 +29,4 @@ class Login(FormView):
         return super(Login, self).form_valid(form)
 
 def home(request):
-    if request.user.is_authenticated():
         return render(request, 'sopa/index.html')
-    else:
-        return HttpResponseRedirect("localhost:9000")
