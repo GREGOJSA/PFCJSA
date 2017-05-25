@@ -1,7 +1,10 @@
 body {
-  background: #eee !important;
+  background: #0048B3 url(https://comolaslentejas.files.wordpress.com/2010/06/urjcfuenla.jpg) ; !important;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
 }
-
 .wrapper {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -11,8 +14,12 @@ body {
   max-width: 380px;
   padding: 15px 35px 45px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: rgba(255,255,255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.1);
+  -webkit-border-radius:15px;/*Chrome y Safari*/
+  -moz-border-radius:15px;/*Firefox*/
+  -o-border-radius:15px;/*Opera*/
+  border-radius:15px;/*Estandar por defecto*/
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
