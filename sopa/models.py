@@ -1,12 +1,9 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
-class usuarios (models.Model):
-    user = models.TextField(max_length=15,null=True,blank=True,default='No configurado')
-    nombre = models.TextField(max_length=15,null=True,blank=True,default='')
-    apellido = models.TextField(max_length=15,null=True,blank=True,default='')
-    email = models.TextField(max_length=30,null=True,blank=True,default='')
+class usuarios (AbstractUser):
     id_grado = models.IntegerField(null=True,blank=True,default='0')
 
 class grados (models.Model):

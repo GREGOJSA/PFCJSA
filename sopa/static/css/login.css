@@ -5,6 +5,9 @@ body {
   -webkit-background-size: cover;
   -o-background-size: cover;
 }
+img{
+  opacity: 0.2;
+}
 .wrapper {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -49,6 +52,15 @@ body {
   margin-bottom: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.form-signin h2{
+  text-align:center;
+  font-family: Arial;
+  color: rgb(45,137,198);
+  font-size: 50px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+
 }
 .btn {
   background: #3498db;

@@ -30,9 +30,4 @@ class Login(FormView):
         return super(Login, self).form_valid(form)
 
 def home(request):
-        print(request.user)
-        if str(request.user) == "Celia" :
-            auth.logout(request)
-            return HttpResponseRedirect("https://www.youtube.com/watch?v=tfJLGUnKoW0")
-        else:
-            return render(request, 'sopa/index.html')
+        return render(request, 'sopa/index.html')
