@@ -5,8 +5,17 @@ body {
   -webkit-background-size: cover;
   -o-background-size: cover;
 }
+.link{
+  text-align:center;
+
+}
+.errorlist{
+
+  text-align:center;
+  font-size: 50px;
+}
 img{
-  opacity: 0.2;
+  opacity: 0.2
 }
 .wrapper {
   margin-top: 80px;

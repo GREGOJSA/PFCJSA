@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/></meta>
+        <title>Acceso a SOPA</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
+        <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css'  %}"></link>
+    </head>
+    <body>
+      <div class="wrapper">
+        <form class="form-signin" role="form" method="post" id="form_login">
+          {% csrf_token %}
+          <h2 class="form-signin-heading">Registro en SOPA</h2>
+          <input type="text" class="form-control" name="username" placeholder="Usuario" required="" />
+          <input type="password" class="form-control" name="password1" placeholder="Contraseña" required="" />
+          <input type="password" class="form-control" name="password2" placeholder="Confirme contraseña" required="" />
+          <input type="text" class="form-control" name="first_name" placeholder="Nombre" required="" />
+          <input type="text" class="form-control" name="last_name" placeholder="Apellido" required="" />
+          <input type="text" class="form-control" name="email" placeholder="Correo" required="" />
+          <input type="number" class="form-control" name="id_grado" placeholder="Grado" required="" />
+          {{ form.errors }}
+          {{ form.non_field_errors }}
+
+          <br>
+
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
+        </form>
+
+      </div>
+    </body>
+</html>

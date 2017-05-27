@@ -7,7 +7,9 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib import auth
-
+from django.views.generic import CreateView
+from .forms import RegistroForm
+from .models import *
 
 class Login(FormView):
     #Establecemos la plantilla a utilizar
@@ -28,6 +30,17 @@ class Login(FormView):
     def form_valid(self, form):
         login(self.request, form.get_user())
         return super(Login, self).form_valid(form)
+
+class RegistroUsuario(CreateView):
+    model = usuarios
+    template_name = "sopa/registro.html"
+    form_class = RegistroForm
+    success_url = reverse_lazy("home")
+    def form_valid(self, form, *args, **kwargs):
+        print('hola')
+        response = super(RegistroUsuario, self).form_valid(form, *args, **kwargs)
+        user = self.object
+        return response
 
 def home(request):
         return render(request, 'sopa/index.html')

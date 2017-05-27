@@ -12,14 +12,16 @@
       <div class="wrapper">
         <form class="form-signin" role="form" method="post" id="form_login">
           {% csrf_token %}
-          <h2 class="form-signin-heading">Acceso a SOPA</h2>
+          <h2 class="form-signin-heading">Login obligatorio</h2>
           <input type="text" class="form-control" name="username" placeholder="Usuario" required="" />
           <input type="password" class="form-control" name="password" placeholder="Contraseña" required="" />
           <br>
 
           <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
           <br>
-          <a class="link" href="/new_user">CREAR CUENTA </a>
+          <div class ="link">
+            <a href="/new_user">CREAR CUENTA </a>
+          </div>
         </form>
 
       </div>
