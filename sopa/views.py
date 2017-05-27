@@ -35,9 +35,8 @@ class RegistroUsuario(CreateView):
     model = usuarios
     template_name = "sopa/registro.html"
     form_class = RegistroForm
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("login")
     def form_valid(self, form, *args, **kwargs):
-        print('hola')
         response = super(RegistroUsuario, self).form_valid(form, *args, **kwargs)
         user = self.object
         return response
