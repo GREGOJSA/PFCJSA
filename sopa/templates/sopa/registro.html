@@ -19,7 +19,17 @@
           <input type="text" class="form-control" name="first_name" placeholder="Nombre" required="" />
           <input type="text" class="form-control" name="last_name" placeholder="Apellido" required="" />
           <input type="text" class="form-control" name="email" placeholder="Correo" required="" />
-          <input type="number" class="form-control" name="id_grado" placeholder="Grado" required="" />
+          <br>
+          <p>Seleccione su titulación </p>
+          <select id="soflow" name="id_grado" placeholder="grado" class="form-control">
+
+            <option value="1">Grado1</option>
+
+            <option value="2">grado2</option>
+
+            <option value="3">grado3</option>
+
+          </select>
           {{ form.errors }}
           {{ form.non_field_errors }}
 
