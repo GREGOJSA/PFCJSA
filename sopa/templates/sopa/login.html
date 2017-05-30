@@ -16,10 +16,10 @@
           <input type="text" class="form-control" name="username" placeholder="Usuario" required="" />
           <input type="password" class="form-control" name="password" placeholder="Contraseña" required="" />
           <br>
-
+          {{ form.non_field_errors }}
           <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
           <br>
-          {{ form.non_field_errors }}
+
           <div class ="link">
             <a href="/new_user">CREAR CUENTA </a>
           </div>

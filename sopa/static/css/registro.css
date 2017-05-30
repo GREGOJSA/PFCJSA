@@ -18,6 +18,13 @@ p {
 img{
   opacity: 0.2
 }
+
+.errorlist{
+
+  
+  font-size: 15px;
+  color: #FF0000
+}
 .wrapper {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -176,7 +183,7 @@ select#soflow, select#soflow-color {
    -webkit-appearance: button;
    -webkit-border-radius: 2px;
    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-   -webkit-padding-end: 20px;
+   -webkit-padding-end: auto;
    -webkit-padding-start: 2px;
    -webkit-user-select: none;
    background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);

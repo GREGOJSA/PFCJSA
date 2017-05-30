@@ -12,7 +12,8 @@ body {
 .errorlist{
 
   text-align:center;
-  font-size: 50px;
+  font-size: 15px;
+  color: #FF0000
 }
 img{
   opacity: 0.2

@@ -5,14 +5,14 @@ hgroup {
 }
 
 h1 {
-       
+
        font-family: 'Open Sans', sans-serif;
        font-size: 40px;
        color: rgb(45,137,198);
 }
 h2, h3, h4 {
     font-family: 'Open Sans', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     color: rgb(45,137,198);
 }
 
@@ -22,7 +22,7 @@ nav{
     -moz-border-radius:10px;/*Para Firefox*/
     -o-border-radius:10px;/*Para Opera*/
     border-radius:10px;/*El estandar por defecto*/
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#F6DAFF), to(#FCD848));/*Para chrome y Safari*/
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#CCC));/*Para chrome y Safari*/
     /*Degradados*/
     background-image: -moz-linear-gradient(top center, #FFF, #CCC);/*Para Firefox*/
     background-image: -o-linear-gradient(top, #FFF, #CCC);/*Para Opera*/
@@ -83,7 +83,7 @@ p.login_info{
     float: right;
     text-align:center;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 p.button {
