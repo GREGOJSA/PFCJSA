@@ -7,6 +7,8 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
         <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>
         <link rel="stylesheet" type="text/css" href="{% static 'css/registro.css'  %}"></link>
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
     </head>
     <body>
       <div class="wrapper">
@@ -23,12 +25,16 @@
           <p>Seleccione su titulación </p>
           <select id="soflow" name="id_grado" placeholder="grado" class="form-control">
 
-            <option value="1">Grado1</option>
-
-            <option value="2">grado2</option>
-
-            <option value="3">grado3</option>
-
+            <option value="1">Ingenieria Aeroespacial en Aeronavegación</option>
+            <option value="2">Ingenieria Aeroespacial en Vehículos Aeroespaciales</option>
+            <option value="3">Ingenieria Biomédica</option>
+            <option value="4">Ingenieria en Sistemas Audiovisuales y Multimedia</option>
+            <option value="5">Ingenieria en Sistemas de Telecomunicación</option>
+            <option value="6">Ingenieria en Tecnologías de la Telecomunicación</option>
+            <option value="7">Ingenieria en Telemática</option>
+            <option value="8">Biomedical Engineering</option>
+            <option value="9">Ing. En Sistemas Teleco + ADE</option>
+            <option value="10">Ing. En Tecnologías Teleco + ADE</option>  
           </select>
           {{ form.errors }}
           {{ form.non_field_errors }}
