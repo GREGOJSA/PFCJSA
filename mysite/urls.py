@@ -12,4 +12,7 @@ urlpatterns = [
     url(r'^home/', views.home,name='home'),
     url(r'^logout$', logout, name="logout", kwargs={'next_page': '/'}),
     url(r'^new_user$', RegistroUsuario.as_view(), name='nuevo_usuario'),
+    url(r'^empresas/$', views.lista_empresas, name='lista_empresas'),
+    url(r'^empresas/new/$', views.nueva_empresa, name='nueva_empresa'),
+    url(r'^usuarios/miperfil/$', views.miperfil, name='mi_perfil'),
     ]

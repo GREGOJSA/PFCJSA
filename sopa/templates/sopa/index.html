@@ -2,25 +2,25 @@
 
     <!DOCTYPE html>
     <html>
-        <hgroup>
-          <h1>Sistema de Opinión sobre Prácticas para Alumnos</h1>
-          <h2>Infórmate sobre las prácticas en empresas que te interesan y ayuda a tus compañero con tu experiencia</h2>
-          <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-          <link rel="stylesheet" href="{% static 'css/sopa.css' %}">
-          <link rel="shortcut icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
-          <link rel="icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
-        </hgroup>
-          <nav>
+      <header>
+        <h1>Sistema de Opinión sobre Prácticas para Alumnos</h1>
+        <p class="subtitle">Infórmate sobre las prácticas en empresas que te interesan y ayuda a tus compañero con tu experiencia</p>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/sopa.css' %}">
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
+
+        <nav>
           <ul>
-            <li><a title="Home" href="#">Opción 1</a></li>
-            <li><a title="Encuestas" href="#">Opción 2</a></li>
-            <li><a title="Empresas" href="#">Opción 3</a></li>
-            <li><a title="Opcion 4" href="#">Opción 4</a></li>
-            <li><a title="Opcion 5" href="#">Opción 5</a></li>
+            <li><a title="Home" href="/home">Home</a></li>
+            <li><a title="Empresas" href="/empresas">Empresas</a></li>
+            <li><a title="Opiniones" href="#">Opiniones</a></li>
+            <li><a title="Mi perfil" href="/usuarios/miperfil">Mi perfil</a></li>
+            <li><a title="Ayuda" href="#">Ayuda</a></li>
           </ul>
           <p class="login_info">Logged in as <a title="Ir al perfil de {{ user.username }}" href="/users/{{ user.username }}">{{ user.username }}</a>,&nbsp;&nbsp;<a class="button" title="logout" href="/logout">logout</a></p>
         </nav>
+        </header>
         <br>
         {% block content %}
         {% endblock content %}
-    </html>

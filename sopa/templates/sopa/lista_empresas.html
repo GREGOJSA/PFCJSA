@@ -1,0 +1,13 @@
+{% extends "sopa/index.html" %}
+{% block content %}
+{% for empresa in empresas %}
+  <p> Empresa: {{empresa.nombre_empresa}} </p>
+  <p> Ubicacion: {{empresa.ubicacion}} </p>
+  <p> Tutor: {{empresa.tutor}} </p>
+  <br>
+
+
+
+{% endfor %}
+<a href="/empresas/new/">nueva</a>
+{% endblock content %}

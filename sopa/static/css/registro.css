@@ -20,8 +20,6 @@ img{
 }
 
 .errorlist{
-
-  
   font-size: 15px;
   color: #FF0000
 }
@@ -106,53 +104,8 @@ img{
   text-decoration: none;
 }
 
-/* -------------------- Page Styles (not required) */
+
 div { margin: 20px; }
-
-/* -------------------- Select Box Styles: bavotasan.com Method (with special adaptations by ericrasch.com) */
-/* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
-.styled-select {
-   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
-   height: 29px;
-   overflow: hidden;
-   width: 240px;
-}
-
-.styled-select select {
-   background: transparent;
-   border: none;
-   font-size: 14px;
-   height: 29px;
-   padding: 10px; /* If you add too much padding here, the options won't show in IE */
-   width: 268px;
-}
-
-.styled-select.slate {
-   background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
-   height: 34px;
-   width: 240px;
-}
-
-.styled-select.slate select {
-   border: 1px solid #ccc;
-   font-size: 16px;
-   height: 34px;
-   width: 268px;
-}
-
-/* -------------------- Rounded Corners */
-.rounded {
-   -webkit-border-radius: 20px;
-   -moz-border-radius: 20px;
-   border-radius: 20px;
-}
-
-.semi-square {
-   -webkit-border-radius: 5px;
-   -moz-border-radius: 5px;
-   border-radius: 5px;
-}
-
 
 #mainselection select {
    border: 0;
@@ -165,6 +118,7 @@ div { margin: 20px; }
    *width: 350px;
    *background: #58B14C;
    -webkit-appearance: none;
+   text-overflow: ellipsis;
 }
 
 #mainselection {
@@ -175,6 +129,7 @@ div { margin: 20px; }
    border-radius: 9px 9px 9px 9px;
    box-shadow: 1px 1px 11px #330033;
    background: #58B14C url("http://i62.tinypic.com/15xvbd5.png") no-repeat scroll 319px center;
+   text-overflow: ellipsis;
 }
 
 

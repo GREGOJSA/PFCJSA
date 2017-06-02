@@ -1,7 +1,8 @@
-hgroup {
+header {
         padding-left: 15px;
-
         color: rgb(45,137,198);
+
+
 }
 
 h1 {
@@ -10,9 +11,9 @@ h1 {
        font-size: 40px;
        color: rgb(45,137,198);
 }
-h2, h3, h4 {
+.subtitle{
     font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-size: 20px;
     color: rgb(45,137,198);
 }
 
@@ -93,4 +94,13 @@ p.button {
 
     text-decoration: none;
     color: initial;
+}
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
 }

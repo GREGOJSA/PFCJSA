@@ -20,3 +20,17 @@ class RegistroForm(UserCreationForm):
             'email': "Correo electronico",
             'id_grado': "id_grado",
         }
+
+class NuevaEmpresaform(forms.ModelForm):
+
+    class Meta:
+        model = empresas
+        fields = ['nombre_empresa',
+                  'ubicacion',
+                  'tutor',
+        ]
+        labels = {
+            'nombre_empresa': 'Nombre de la empresa',
+            'ubicacion': 'Ubicacion',
+            'tutor': 'Tutor',
+        }

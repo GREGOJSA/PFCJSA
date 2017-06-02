@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 #Importamos la vista generica FormView
 from django.views.generic.edit import FormView
 from django.http.response import HttpResponseRedirect
@@ -8,8 +8,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib import auth
 from django.views.generic import CreateView
-from .forms import RegistroForm
+from .forms import *
 from .models import *
+from django.contrib.auth.decorators import login_required
+
+
 
 class Login(FormView):
     #Establecemos la plantilla a utilizar
@@ -41,5 +44,29 @@ class RegistroUsuario(CreateView):
         user = self.object
         return response
 
+@login_required
 def home(request):
-        return render(request, 'sopa/index.html')
+    return render(request, 'sopa/home.html')
+
+@login_required
+def nueva_empresa(request):
+    if request.method == "POST":
+        form = NuevaEmpresaform(request.POST)
+        if form.is_valid():
+            empresa = form.save(commit=False)
+            empresa.save()
+            print(empresa)
+            return HttpResponseRedirect('/empresas')
+    else:
+        form = NuevaEmpresaform()
+    return render(request, 'sopa/nueva_empresa.html', {'form': form})
+
+@login_required
+def lista_empresas(request):
+    empresa = empresas.objects.all()
+    return render(request, 'sopa/lista_empresas.html', {'empresas' : empresa})
+
+def miperfil(request):
+    usuario = get_object_or_404(usuarios, username = request.user)
+    grado = get_object_or_404(grados, id_grado = usuario.id_grado)
+    return render(request, 'sopa/perfil_usuario.html', {'usuario' : usuario, 'grado' : grado})
