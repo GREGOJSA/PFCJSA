@@ -70,3 +70,15 @@ def miperfil(request):
     usuario = get_object_or_404(usuarios, username = request.user)
     grado = get_object_or_404(grados, id_grado = usuario.id_grado)
     return render(request, 'sopa/perfil_usuario.html', {'usuario' : usuario, 'grado' : grado})
+
+@login_required
+def lista_usuarios(request):
+    usuario = usuarios.objects.all()
+    return render(request, 'sopa/lista_alumnos.html', {'alumnos' : usuario})
+
+@login_required
+def detalle_usuario(request, u):
+    print(u)
+    usuario = get_object_or_404(usuarios, username = u)
+    grado = get_object_or_404(grados, id_grado = usuario.id_grado)
+    return render(request, 'sopa/detalle_usuario.html', {'usuario' : usuario, 'grado' : grado})
