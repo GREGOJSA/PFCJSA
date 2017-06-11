@@ -44,22 +44,16 @@ class RegistroUsuario(CreateView):
         user = self.object
         return response
 
-@login_required
+
 def home(request):
     return render(request, 'sopa/home.html')
 
-@login_required
-def nueva_empresa(request):
-    if request.method == "POST":
-        form = NuevaEmpresaform(request.POST)
-        if form.is_valid():
-            empresa = form.save(commit=False)
-            empresa.save()
-            print(empresa)
-            return HttpResponseRedirect('/empresas')
-    else:
-        form = NuevaEmpresaform()
-    return render(request, 'sopa/nueva_empresa.html', {'form': form})
+
+class crearempresa(CreateView):
+        model = empresas
+        template_name = "sopa/nueva_empresa.html"
+        form_class = NuevaEmpresaform
+        success_url = reverse_lazy('lista_empresas')
 
 @login_required
 def lista_empresas(request):

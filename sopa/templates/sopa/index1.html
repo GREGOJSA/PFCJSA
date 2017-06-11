@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+    <!DOCTYPE html>
+    <html>
+      <header>
+        <nav>
+          <ul>
+            <li><a title="Home" href="/home">Home</a></li>
+            <li><a title="Empresas" href="/empresas">Empresas</a></li>
+            <li><a title="Alumnos" href="/usuarios">Alumnos</a></li>
+            <li><a title="Mi perfil" href="/usuarios/miperfil">Mi perfil</a></li>
+            <li><a title="Ayuda" href="#">Ayuda</a></li>
+          </ul>
+          <p class="login_info">Logged in as <a title="Ir al perfil de {{ user.username }}" href="/usuarios/{{ user.username }}">{{ user.username }}</a>,&nbsp;&nbsp;<a class="button" title="logout" href="/logout">logout</a></p>
+        </nav>
+        <h1>Sistema de Opinión sobre Prácticas para Alumnos</h1>
+        <p class="subtitle">Infórmate sobre las prácticas en empresas que te interesan y ayuda a tus compañero con tu experiencia</p>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/sopa.css' %}">
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
+
+
+        </header>
+        <br>
+        <body>
+        {% block content %}
+        {% endblock content %}
+        </body>
