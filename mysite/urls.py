@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^usuarios/miperfil/$', views.miperfil, name='mi_perfil'),
     url(r'^usuarios/$', views.lista_usuarios, name='lista_usuarios'),
     url(r'^usuarios/(?P<u>.+)/$', views.detalle_usuario, name='detalle_usuarios'),
+    url(r'^encuesta/$', EncuestaWizard.as_view([PreguntasBasicasForm, PreguntasOpcionalesForm])),
     ]

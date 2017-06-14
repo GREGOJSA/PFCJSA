@@ -1,5 +1,7 @@
 {% extends "sopa/index.html" %}
 {% block content %}
+
+<div class ="row col-md-4 col-md-offset-5">
 {% for alumno in alumnos %}
   <p> User: <a href= '/usuarios/{{alumno.username}}'>{{alumno.username}}</a> </p>
   <p> Nombre: {{alumno.first_name}} </p>
@@ -9,5 +11,5 @@
 
 
 {% endfor %}
-
+</div>
 {% endblock content %}

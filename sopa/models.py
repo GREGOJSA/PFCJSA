@@ -22,10 +22,13 @@ class opiniones (models.Model):
     id_encuesta = models.IntegerField(null=True,blank=True,default='0')
 
 class encuentas (models.Model):
+    user = models.TextField(max_length=20,null=True,blank=True,default='')
+    nombre_empresa = models.TextField(max_length=30,null=True,blank=True,default='')
     id_encuesta = models.IntegerField(null=True,blank=True,default='0')
-    p1 = models.TextField(null=True,blank=True,default='')
-    p2 = models.TextField(null=True,blank=True,default='')
-    p3 = models.TextField(null=True,blank=True,default='')
-    p4 = models.TextField(null=True,blank=True,default='')
+    created_date = models.DateTimeField(default=timezone.now)
+    pb1 = models.TextField(null=True,blank=True,default='')
+    pb2 = models.TextField(null=True,blank=True,default='')
+    pb3 = models.TextField(null=True,blank=True,default='')
+    pb4 = models.TextField(null=True,blank=True,default='')
     p5 = models.TextField(null=True,blank=True,default='')
     p6 = models.TextField(null=True,blank=True,default='')

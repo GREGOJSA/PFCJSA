@@ -1,9 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-#Importamos la vista generica FormView
 from django.views.generic.edit import FormView
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
-#Importamos el formulario de autenticacion de django
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib import auth
@@ -11,8 +9,9 @@ from django.views.generic import CreateView
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
+from formtools.wizard.views import SessionWizardView
 
-
+TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
 class Login(FormView):
     #Establecemos la plantilla a utilizar
@@ -76,3 +75,10 @@ def detalle_usuario(request, u):
     usuario = get_object_or_404(usuarios, username = u)
     grado = get_object_or_404(grados, id_grado = usuario.id_grado)
     return render(request, 'sopa/detalle_usuario.html', {'usuario' : usuario, 'grado' : grado})
+
+class EncuestaWizard(SessionWizardView):
+    template_name = "sopa/cuestionario.html"
+
+    def done(self, form_list, **kwargs):
+        print('done')
+        return HttpResponseRedirect("/empresas")

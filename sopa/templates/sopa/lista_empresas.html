@@ -1,5 +1,6 @@
 {% extends "sopa/index.html" %}
 {% block content %}
+<div class ="row col-md-4 col-md-offset-5">
 {% for empresa in empresas %}
   <p> Empresa: {{empresa.nombre_empresa}} </p>
   <p> Ubicacion: {{empresa.ubicacion}} </p>
@@ -9,5 +10,6 @@
 
 
 {% endfor %}
+</div>
 <a href="/empresas/new/">nueva</a>
 {% endblock content %}
