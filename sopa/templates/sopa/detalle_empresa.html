@@ -1,0 +1,30 @@
+{% extends "sopa/index.html" %}
+{% block content %}
+<div class ="row col-md-4 col-md-offset-5">
+
+<p>Nombre de la empresa: {{empresa.nombre_empresa}}</p>
+<p>Ubicacion de la empresa: {{empresa.ubicacion}}</p>
+<p>Tutor de la empresa: {{empresa.tutor}}</p>
+
+<p>Bloque de opiiones</p>
+<p>{{aux}}</p>
+{%for opinion in opiniones%}
+<p>Autor: <a href='/encuesta/{{opinion.pk}}'>{{opinion.user}}</p>
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends "sopa/index.html" %}
+{% block content %}
+<div class ="row col-md-4 col-md-offset-5"><br>
+
+<p> Cuestiones fundamentales </p><br>
+
+<p>Nombre de la empresa: {{encuesta.nombre_empresa}}</p><br>
+<p>Creador de la encuesta: {{encuesta.user}}</p><br>
+<p>Fecha de creacion: {{encuesta.created_date}}</p><br>
+<p>Tematicas de trabajo: {{encuesta.pf1}}</p><br>
+<p>Otras tematicas: {{encuesta.pf11}}</p><br>
+<p>Ayudas: {{encuesta.pf2}}</p><br>
+<p>Otras ayudas{{encuesta.pf22}}</p><br>
+
+<p>Cuestiones importantes</p><br>
+
+<p>Practicas remuneradas:{{encuesta.pb1}}</p><br>
+<p>Posibilidad de posterior contratacion:{{encuesta.pb2}}</p><br>
+<p>Relacion personal y laboral con el tutor: {{encuesta.pb3}}</p><br>
+<p>Requisitos previos: {{encuesta.pb4}}</p><br>
+
+<p>Cuestiones de menor importancia</p><br>
+
+<p>Forma de trabajo: {{encuesta.ps1}}</p><br>
+<p>Tipo de jornada: {{encuesta.ps2}}</p><br>
+<p>Flexibilidad de la jornada: {{encuesta.ps3}}</p><br>
+<p>Periodo vacacional: {{encuesta.ps4}}</p><br>
+<p>Duracion de la beca: {{encuesta.ps5}}</p><br>
+<p>Ambiente laboral: {{encuesta.ps6}}</p><br>
+<p>Descripcion breve del contenido de la beca: {{encuesta.ps7}}</p><br>
+
+<p>Cuestiones anecdoticas</p><br>
+
+<p>Conocimientos adquiridos que anadiras a tu CV: {{encuesta.pa1}}</p><br>
+<p>Comentarios y recomendaciones adicionales: {{encuesta.pa2}}</p><br>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock content %}

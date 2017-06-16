@@ -2,7 +2,7 @@
 {% block content %}
 <div class ="row col-md-4 col-md-offset-5">
 {% for empresa in empresas %}
-  <p> Empresa: {{empresa.nombre_empresa}} </p>
+  <p> Empresa: <a href= '/empresas/{{empresa.nombre_empresa}}'>{{empresa.nombre_empresa}}</a> </p>{{empresa.nombre_empresa}} </p>
   <p> Ubicacion: {{empresa.ubicacion}} </p>
   <p> Tutor: {{empresa.tutor}} </p>
   <br>

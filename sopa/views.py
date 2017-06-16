@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 from django.views.generic.edit import FormView
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
@@ -71,14 +72,58 @@ def lista_usuarios(request):
 
 @login_required
 def detalle_usuario(request, u):
-    print(u)
     usuario = get_object_or_404(usuarios, username = u)
     grado = get_object_or_404(grados, id_grado = usuario.id_grado)
     return render(request, 'sopa/detalle_usuario.html', {'usuario' : usuario, 'grado' : grado})
+
+@login_required
+def detalle_empresa(request, p):
+    empresa = get_object_or_404(empresas, nombre_empresa = p)
+    hayopiniones = encuestas.objects.filter(nombre_empresa = p)
+    if hayopiniones:
+        aux=""
+        opiniones = hayopiniones
+    else:
+        aux="No se han aniadido opiniones"
+        opiniones = ""
+    return render(request, 'sopa/detalle_empresa.html', {'empresa' : empresa, 'opiniones': opiniones, "aux": aux})
+
+@login_required
+def detalle_encuesta(request, pk):
+    encuesta = get_object_or_404(encuestas, pk = pk)
+    return render(request, 'sopa/detalle_encuesta.html', {'encuesta' : encuesta})
 
 class EncuestaWizard(SessionWizardView):
     template_name = "sopa/cuestionario.html"
 
     def done(self, form_list, **kwargs):
-        print('done')
+        print('Encuesta realizada')
+        datos={}
+        for x in form_list:
+            datos=dict(datos.items()+x.cleaned_data.items())
+        encuesta = encuestas(
+        user = self.request.user,
+        nombre_empresa = datos['nombre_empresa'],
+        created_date = timezone.now(),
+        pf1 = str(datos['pf1']),
+        pf11 = str(datos['pf11']),
+        pf2 = str(datos['pf2']),
+        pf22 = str(datos['pf22']),
+        pb1 = str(datos['pb1']),
+        pb2 = str(datos['pb2']),
+        pb3 = str(datos['pb3']),
+        pb4 = str(datos['pb4']),
+        ps1 = str(datos['ps1']),
+        ps2 = str(datos['ps2']),
+        ps3 = str(datos['ps3']),
+        ps4 = str(datos['ps3']),
+        ps5 = str(datos['ps5']),
+        ps6 = str(datos['ps6']),
+        ps7 = str(datos['ps7']),
+        pa1 = str(datos['pa1']),
+        pa2 = str(datos['pa2'])
+        )
+        encuesta.save()
+
+
         return HttpResponseRedirect("/empresas")
