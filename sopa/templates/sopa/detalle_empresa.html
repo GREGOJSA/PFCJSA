@@ -6,10 +6,42 @@
 <p>Ubicacion de la empresa: {{empresa.ubicacion}}</p>
 <p>Tutor de la empresa: {{empresa.tutor}}</p>
 
-<p>Bloque de opiiones</p>
+<div id="map" class"map"></div>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+
+        geocodeAddress(geocoder, map);
+
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = "{{empresa.nombre_empresa}}  {{empresa.ubicacion}}";
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGVn2aOK_4lrdN3FRn50zfuYzC8l2B148&callback=initMap">
+    </script>
+<p>Bloque de opiniones</p>
 <p>{{aux}}</p>
 {%for opinion in opiniones%}
-<p>Autor: <a href='/encuesta/{{opinion.pk}}'>{{opinion.user}}</p>
+<p>Autor: <a href='/encuesta/{{opinion.pk}}'>{{opinion.user}}</a></p>
 
 {% endfor %}
 

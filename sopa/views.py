@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+# -- coding: utf-8
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic.edit import FormView
@@ -11,6 +13,7 @@ from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 from formtools.wizard.views import SessionWizardView
+
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
