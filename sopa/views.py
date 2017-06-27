@@ -67,7 +67,9 @@ def notamedia(e):
         for x in emp:
             a = a + int(x.nota)
         media = a / nemp
-        
+        print (media)
+        print (a)
+        print (nemp)
         empresas.objects.filter(nombre_empresa = e.nombre_empresa).update(valoracion = media)
 
 
@@ -84,7 +86,7 @@ def miperfil(request):
         grado = grados.objects.get(id_grado=usuario.id_grado)
     except ObjectDoesNotExist:
         grado = "no especificado"
-    print grado
+    print (grado)
     op = encuestas.objects.filter(user = usuario.username).order_by('created_date')
     return render(request, 'sopa/perfil_usuario.html', {'usuario' : usuario, 'grado' : grado, 'opinion' : op})
 
@@ -100,7 +102,7 @@ def detalle_usuario(request, u):
         grado = grados.objects.get(id_grado=usuario.id_grado)
     except ObjectDoesNotExist:
         grado = "no especificado"
-    print grado
+    print (grado)
     hayopiniones = encuestas.objects.filter(user = usuario)
     if hayopiniones:
         aux=""
@@ -146,7 +148,7 @@ class EncuestaWizard(SessionWizardView):
             datos=dict(datos.items()+x.cleaned_data.items())
         [dato.encode("utf8") for dato in datos]
         a = datos['nota'],
-        print a
+        print (a)
         encuesta = encuestas(
         user = self.request.user,
         nombre_empresa = self.kwargs.get('e', None),
