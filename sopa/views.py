@@ -67,9 +67,7 @@ def notamedia(e):
         for x in emp:
             a = a + int(x.nota)
         media = a / nemp
-        print media
-        print a
-        print nemp
+        
         empresas.objects.filter(nombre_empresa = e.nombre_empresa).update(valoracion = media)
 
 
