@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
@@ -51,3 +52,4 @@ class encuestas (models.Model):
     # Preguntas anecdoticas para completar
     pa1 = models.TextField(max_length=20,null=True,blank=True,default='')
     pa2 = models.TextField(max_length=20,null=True,blank=True,default='')
+    nota = models.IntegerField(null=True,blank=True,default='0')

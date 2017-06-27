@@ -5,13 +5,14 @@
 <p>Nombre de la empresa: {{empresa.nombre_empresa}}</p>
 <p>Ubicacion de la empresa: {{empresa.ubicacion}}</p>
 <p>Tutor de la empresa: {{empresa.tutor}}</p>
+<p>Valoración de la empresa: <span class="rating-static rating-{{empresa.valoracion}}0"></span>
 
 <div id="map" class"map"></div>
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: {lat: -34.397, lng: 150.644}
+          zoom: 14,
+          center: {lat: 40.416964, lng: -3.703421}
         });
         var geocoder = new google.maps.Geocoder();
 
@@ -39,9 +40,10 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGVn2aOK_4lrdN3FRn50zfuYzC8l2B148&callback=initMap">
     </script>
 <p>Bloque de opiniones</p>
+<p>Nueva opinión sobre: <a href="/encuesta/nueva/{{empresa.nombre_empresa}}"> {{empresa.nombre_empresa}}</a></p>
 <p>{{aux}}</p>
 {%for opinion in opiniones%}
-<p>Autor: <a href='/encuesta/{{opinion.pk}}'>{{opinion.user}}</a></p>
+<p>Opinion de: <a href='/encuesta/detalle/{{opinion.pk}}'>{{opinion.user}}</a> Publicada el {{opinion.created_date}}</p>
 
 {% endfor %}
 

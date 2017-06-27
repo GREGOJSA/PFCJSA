@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-# -- coding: utf-8
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
@@ -39,10 +39,10 @@ class NuevaEmpresaform(forms.ModelForm):
         }
 
 class PreguntasFundamentalesForm(forms.Form):
-        nombre_empresa = forms.CharField(label = 'Nombre de la empresa')
+
 
         OpcionesPf1 = (
-            ('Programacion Web','Programacion web'),
+            ('Programación Web','Programación web'),
             ('Redes','Redes'),
             ('Big Data','Big Data'),
             ('Programacion de escritorio','Programacion de escritorio'),
@@ -50,7 +50,7 @@ class PreguntasFundamentalesForm(forms.Form):
             ('Economia','Economia'),
             ('Eloectronica','Electronica'),
         )
-        pf1 = forms.MultipleChoiceField(label = 'Tematicas',
+        pf1 = forms.MultipleChoiceField(label = 'Temáticas',
                                         widget = forms.CheckboxSelectMultiple,
                                         choices=OpcionesPf1
                                         )
@@ -70,7 +70,11 @@ class PreguntasFundamentalesForm(forms.Form):
                                         )
         pf22 = forms.CharField(label = 'Otras ayudas')
 
-
+        OpcionesPf3 = [(1 , 'Muy mala'),(2 , 'Mala'),(3 , 'Normal'),(4 , 'Buena' ), (5 , 'Muy buena')]
+        nota = forms.ChoiceField(label = 'Opinión general sobre la empresa',
+                               choices = OpcionesPf3,
+                               widget = forms.RadioSelect(),
+                               )
 
 
 class PreguntasBasicasForm(forms.Form):

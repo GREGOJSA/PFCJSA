@@ -5,7 +5,12 @@
 <p> Nombre: {{usuario.first_name}} </p>
 <p> Apellido: {{usuario.last_name}} </p>
 <p> mail: {{usuario.email}} </p>
-<p> Grado: {{grado.nombre_grado}} </p>
-</div>
+<p> Grado: {{grado}}{{grado.nombre_grado}} </p>
 
+  <p> Bloque opiniones:</p>
+  {%for op in opinion%}
+  <p>Opinion sobre: <a href='/encuesta/detalle/{{op.pk}}'>{{op.nombre_empresa}}</a> Publicada el {{op.created_date}}</p>
+
+  {% endfor %}
+</div>
 {% endblock content %}

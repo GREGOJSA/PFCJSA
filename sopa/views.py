@@ -1,5 +1,5 @@
-from __future__ import unicode_literals
-# -- coding: utf-8
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals, division
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic.edit import FormView
@@ -13,7 +13,8 @@ from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 from formtools.wizard.views import SessionWizardView
-
+import django.utils.encoding
+from django.core.exceptions import *
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
@@ -58,6 +59,22 @@ class crearempresa(CreateView):
         form_class = NuevaEmpresaform
         success_url = reverse_lazy('lista_empresas')
 
+def notamedia(e):
+    emp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa)
+    nemp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa).count()
+    a = 0
+    if nemp != 0:
+        for x in emp:
+            a = a + int(x.nota)
+        media = a / nemp
+        print media
+        print a
+        print nemp
+        empresas.objects.filter(nombre_empresa = e.nombre_empresa).update(valoracion = media)
+
+
+
+
 @login_required
 def lista_empresas(request):
     empresa = empresas.objects.all()
@@ -65,8 +82,13 @@ def lista_empresas(request):
 
 def miperfil(request):
     usuario = get_object_or_404(usuarios, username = request.user)
-    grado = get_object_or_404(grados, id_grado = usuario.id_grado)
-    return render(request, 'sopa/perfil_usuario.html', {'usuario' : usuario, 'grado' : grado})
+    try:
+        grado = grados.objects.get(id_grado=usuario.id_grado)
+    except ObjectDoesNotExist:
+        grado = "no especificado"
+    print grado
+    op = encuestas.objects.filter(user = usuario.username).order_by('created_date')
+    return render(request, 'sopa/perfil_usuario.html', {'usuario' : usuario, 'grado' : grado, 'opinion' : op})
 
 @login_required
 def lista_usuarios(request):
@@ -76,13 +98,25 @@ def lista_usuarios(request):
 @login_required
 def detalle_usuario(request, u):
     usuario = get_object_or_404(usuarios, username = u)
-    grado = get_object_or_404(grados, id_grado = usuario.id_grado)
-    return render(request, 'sopa/detalle_usuario.html', {'usuario' : usuario, 'grado' : grado})
+    try:
+        grado = grados.objects.get(id_grado=usuario.id_grado)
+    except ObjectDoesNotExist:
+        grado = "no especificado"
+    print grado
+    hayopiniones = encuestas.objects.filter(user = usuario)
+    if hayopiniones:
+        aux=""
+        opiniones = hayopiniones
+    else:
+        aux="No ha añadido opiniones"
+        opiniones = ""
+    return render(request, 'sopa/detalle_usuario.html', {'usuario' : usuario, 'grado' : grado, 'opiniones' : opiniones})
 
 @login_required
-def detalle_empresa(request, p):
-    empresa = get_object_or_404(empresas, nombre_empresa = p)
-    hayopiniones = encuestas.objects.filter(nombre_empresa = p)
+def detalle_empresa(request, pk):
+    empresa = get_object_or_404(empresas, pk = pk)
+    hayopiniones = encuestas.objects.filter(nombre_empresa = empresa.nombre_empresa)
+    notamedia(empresa)
     if hayopiniones:
         aux=""
         opiniones = hayopiniones
@@ -92,7 +126,15 @@ def detalle_empresa(request, p):
     return render(request, 'sopa/detalle_empresa.html', {'empresa' : empresa, 'opiniones': opiniones, "aux": aux})
 
 @login_required
+def lista_encuestas(request):
+    encuesta = encuestas.objects.all().order_by('created_date')
+    return render(request, 'sopa/lista_encuestas.html', {'encuestas' : encuesta})
+
+
+
+@login_required
 def detalle_encuesta(request, pk):
+    print ("entro en detalle")
     encuesta = get_object_or_404(encuestas, pk = pk)
     return render(request, 'sopa/detalle_encuesta.html', {'encuesta' : encuesta})
 
@@ -104,29 +146,33 @@ class EncuestaWizard(SessionWizardView):
         datos={}
         for x in form_list:
             datos=dict(datos.items()+x.cleaned_data.items())
+        [dato.encode("utf8") for dato in datos]
+        a = datos['nota'],
+        print a
         encuesta = encuestas(
         user = self.request.user,
-        nombre_empresa = datos['nombre_empresa'],
+        nombre_empresa = self.kwargs.get('e', None),
         created_date = timezone.now(),
-        pf1 = str(datos['pf1']),
-        pf11 = str(datos['pf11']),
-        pf2 = str(datos['pf2']),
-        pf22 = str(datos['pf22']),
-        pb1 = str(datos['pb1']),
-        pb2 = str(datos['pb2']),
-        pb3 = str(datos['pb3']),
-        pb4 = str(datos['pb4']),
-        ps1 = str(datos['ps1']),
-        ps2 = str(datos['ps2']),
-        ps3 = str(datos['ps3']),
-        ps4 = str(datos['ps3']),
-        ps5 = str(datos['ps5']),
-        ps6 = str(datos['ps6']),
-        ps7 = str(datos['ps7']),
-        pa1 = str(datos['pa1']),
-        pa2 = str(datos['pa2'])
+        pf1 = datos['pf1'],
+        pf11 = datos['pf11'],
+        pf2 = datos['pf2'],
+        pf22 = datos['pf22'],
+        pb1 = datos['pb1'],
+        pb2 = datos['pb2'],
+        pb3 = datos['pb3'],
+        pb4 = datos['pb4'],
+        ps1 = datos['ps1'],
+        ps2 = datos['ps2'],
+        ps3 = datos['ps3'],
+        ps4 = datos['ps3'],
+        ps5 = datos['ps5'],
+        ps6 = datos['ps6'],
+        ps7 = datos['ps7'],
+        pa1 = datos['pa1'],
+        pa2 = datos['pa2'],
+        nota = datos['nota']
         )
         encuesta.save()
 
 
-        return HttpResponseRedirect("/empresas")
+        return HttpResponseRedirect("/empresas/")

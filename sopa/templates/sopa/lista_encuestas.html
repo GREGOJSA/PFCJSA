@@ -1,0 +1,9 @@
+{% extends "sopa/index.html" %}
+{% block content %}
+<div class ="row col-md-4 col-md-offset-5">
+  <p>Ultimas encuestas añadidas</p>
+  {%for encuesta in encuestas%}
+  <p>Opinion sobre <a href='/encuesta/detalle/{{encuesta.pk}}'>{{encuesta.nombre_empresa}}</a></p>
+  <p>Creada por {{encuesta.user}} el {{encuesta.created_date}}</p>
+{% endfor %}
+{% endblock content %}

@@ -13,27 +13,28 @@
   <link rel="icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" >Hola {{ user.username }}</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="/home">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a title="Empresas" href="/empresas">Empresas</a></li>
-        <li><a title="Alumnos" href="/usuarios">Alumnos</a></li>
+        <li><a title="Encuestas" href="/encuesta">Encuestas</a></li>
         <li><a title="Mi perfil" href="/usuarios/miperfil">Mi perfil</a></li>
         <li><a title="Ayuda" href="#">Ayuda</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
         <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+        {% else %}
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Sing In</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>

@@ -5,10 +5,14 @@
 
 
 
-<div class ="form-group row col-md-4 col-md-offset-4">
+  <div class ="form-group row col-md">
   <br>
+  <div class ="row col-md-4 col-md-offset-4"><br>
   <p>Formulario de opinión y calidad sobre prácticas externas</p>
+
+</div>
   <br>
+  <div class="form-group row col-md-4 col-md-offset-4">
   <p>Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }}</p>
   <br>
   <form action="" method="post">{% csrf_token %}
@@ -17,7 +21,7 @@
   {% if wizard.form.forms %}
       {{ wizard.form.management_form }}
       {% for form in wizard.form.forms %}
-          {{ form }}
+          {{ form.as_p }}
       {% endfor %}
   {% else %}
       {{ wizard.form }}
@@ -31,6 +35,7 @@
 <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.last }}">{% trans "ultimo paso" %}</button>
   <input type="submit" value="{% trans "continuar" %}"/>
   </form>
+</div>
 </div>
 </div>
 
