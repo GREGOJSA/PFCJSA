@@ -50,7 +50,10 @@ class RegistroUsuario(CreateView):
 
 
 def home(request):
-    return render(request, 'sopa/home.html')
+    empresa = empresas.objects.all().order_by('created_date')[:5]
+    opinion = encuestas.objects.all().order_by('created_date')[:5]
+    usuario = usuarios.objects.all().order_by('date_joined')[:5]
+    return render(request, 'sopa/home.html',{'empresas' : empresa, 'opiniones' : opinion, 'usuarios' : usuario})
 
 
 class crearempresa(CreateView):
@@ -67,9 +70,10 @@ def notamedia(e):
         for x in emp:
             a = a + int(x.nota)
         media = a / nemp
-        print (media)
-        print (a)
-        print (nemp)
+        print ('obtenida media de '+x.nombre_empresa)
+        print ('media '+ str(media))
+        print ('suma puntuaciones ' + str(a))
+        print ('numero de encuestas '+ str(nemp))
         empresas.objects.filter(nombre_empresa = e.nombre_empresa).update(valoracion = media)
 
 
@@ -78,8 +82,11 @@ def notamedia(e):
 @login_required
 def lista_empresas(request):
     empresa = empresas.objects.all()
+    for x in empresa:
+        notamedia(x)
     return render(request, 'sopa/lista_empresas.html', {'empresas' : empresa})
 
+@login_required
 def miperfil(request):
     usuario = get_object_or_404(usuarios, username = request.user)
     try:

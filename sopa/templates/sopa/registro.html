@@ -16,7 +16,7 @@
           {% csrf_token %}
           <h2 class="form-signin-heading">Registro en SOPA</h2>
           <input type="text" class="form-control" name="username" placeholder="Usuario" required="" />
-          <input type="password" class="form-control" name="password1" placeholder="Contraseña" required="" />
+          <input type="password" class="form-control" name="password1" placeholder="Contraseña (8 caracteres min.)" required="" />
           <input type="password" class="form-control" name="password2" placeholder="Confirme contraseña" required="" />
           <input type="text" class="form-control" name="first_name" placeholder="Nombre" required="" />
           <input type="text" class="form-control" name="last_name" placeholder="Apellido" required="" />
@@ -34,7 +34,7 @@
             <option value="7">Ing. en Telemática</option>
             <option value="8">Biomedical Engineering</option>
             <option value="9">Ing. En Sistemas Teleco + ADE</option>
-            <option value="10">Ing. En Tecnologías Teleco + ADE</option>  
+            <option value="10">Ing. En Tecnologías Teleco + ADE</option>
           </select>
           {{ form.errors }}
           {{ form.non_field_errors }}

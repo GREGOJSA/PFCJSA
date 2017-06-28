@@ -7,6 +7,36 @@
 </div>
 <div class="container">
   <div class="row">
+    {% if user.is_authenticated %}
+    <div class="col-sm-4">
+      <h3>Últimos usuarios registrados: </h3>
+      {%for us in usuarios%}
+      <ul class="list-group">
+        <li class="list-group-item"><b><u>Usuario:</b></u> <a href="/usuarios/{{us.username}}">{{us.username}}</a></li>
+        <li class="list-group-item"><b><u>Nombre:</b></u> {{us.first_name}} {{us.last_name}}</li>
+      <br>
+      {%endfor%}
+    </div>
+    <div class="col-sm-4">
+      <h3>Últimas empresas registradas: </h3>
+      {%for em in empresas%}
+      <ul class="list-group">
+        <li class="list-group-item"><b><u>Empresa:</b></u> <a href="/empresas/{{em.pk}}">{{em.nombre_empresa}}</a></li>
+        <li class="list-group-item"><b><u>Ubicación:</b></u> {{em.ubicacion}}</li>
+        <li class="list-group-item"><b><u>Tutor:</b></u> {{em.tutor}}</li>
+      </ul>
+      {%endfor%}
+    </div>
+    <div class="col-sm-4">
+      <h3>Últimas opiniones: </h3>
+      {%for op in opiniones%}
+      <ul class="list-group">
+        <li class="list-group-item"><b><u>Opinion de:</b></u> {{op.user}}</li>
+        <li class="list-group-item"><b><u>Sobre:</b></u> <a href="/encuesta/detalle/{{op.pk}}">{{op.nombre_empresa}}</a></li>
+        <li class="list-group-item"><b><u>Publicada el:</b></u> {{op.created_date}}</li>
+      </ul>
+      {%endfor%}
+    {% else %}
     <div class="col-sm-4">
       <h3>Qué es..?</h3>
       <p>Es un sitio donde encontrar opiniones sobre prácticas en empresas de tus compañeros de la ETSIT.
@@ -25,6 +55,8 @@
       <p>Es un proceso fácil y rápido.</p>
       <p>No se comparten tus datos con ninguna empresa o persona.</p>
       <p>Averigua que empresas te interesan mas en base a la opinión de tus compañeros</p>
+      <a href="/new_user" class="btn btn-info" role="button">Ir a registro</a>
+      {% endif %}
     </div>
   </div>
 </div>
