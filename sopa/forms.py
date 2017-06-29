@@ -50,7 +50,7 @@ class PreguntasFundamentalesForm(forms.Form):
             ('Programacion de escritorio','Programacion de escritorio'),
             ('Gestion','Gestion'),
             ('Economia','Economia'),
-            ('Eloectronica','Electronica'),
+            ('Electronica','Electronica'),
         )
         pf1 = forms.MultipleChoiceField(label = 'Temáticas',
                                         widget = forms.CheckboxSelectMultiple,

@@ -147,12 +147,7 @@ def lista_encuestas(request):
 def detalle_encuesta(request, pk):
     print ("entro en detalle")
     encuesta = get_object_or_404(encuestas, pk = pk)
-    a = re.sub("[u']",'',encuesta.pf1)
-    pf1 = a[1:-1]
-    print pf1
-    b = a = re.sub("[u']",'',encuesta.pf2)
-    pf2 = b[1:-1]
-    return render(request, 'sopa/detalle_encuesta.html', {'titulo': 'SOPA Detalle encuesta' ,'encuesta' : encuesta, 'pf1': pf1, 'pf2' : pf2})
+    return render(request, 'sopa/detalle_encuesta.html', {'titulo': 'SOPA Detalle encuesta' ,'encuesta' : encuesta})
 
 class EncuestaWizard(SessionWizardView):
     template_name = "sopa/cuestionario.html"
@@ -163,17 +158,19 @@ class EncuestaWizard(SessionWizardView):
         for x in form_list:
             datos=dict(datos.items()+x.cleaned_data.items())
         [dato.encode("utf8") for dato in datos]
-        a = datos['nota'],
-        print (a)
+        a = re.sub("[u']",'',str(datos['pf1']))
+        pf1str = a[1:-1]
+        b = re.sub("[u']",'',str(datos['pf2']))
+        pf2str = a[1:-1]
         encuesta = encuestas(
         user = self.request.user,
         nombre_empresa = self.kwargs.get('e', None),
         departamento = self.kwargs.get('d', None),
         tutor = self.kwargs.get('t', None),
         created_date = timezone.now(),
-        pf1 = datos['pf1'],
+        pf1 = pf1str,
         pf11 = datos['pf11'],
-        pf2 = datos['pf2'],
+        pf2 = pf2str,
         pf22 = datos['pf22'],
         pb1 = datos['pb1'],
         pb2 = datos['pb2'],
