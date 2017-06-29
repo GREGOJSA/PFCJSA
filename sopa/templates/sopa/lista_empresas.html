@@ -3,6 +3,7 @@
 <div class ="row col-md-4 col-md-offset-5">
 {% for empresa in empresas %}
   <p> Empresa: <a href= '/empresas/{{empresa.pk}}'>{{empresa.nombre_empresa}}</a>
+  <p> Departamento: {{empresa.departamento}} </p>
   <p> Ubicacion: {{empresa.ubicacion}} </p>
   <p> Tutor: {{empresa.tutor}} </p>
   <p>Valoración de la empresa: <span class="rating-static rating-{{empresa.valoracion}}0"></span>

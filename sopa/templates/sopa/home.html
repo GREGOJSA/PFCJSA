@@ -21,7 +21,7 @@
       <h3>Últimas empresas registradas: </h3>
       {%for em in empresas%}
       <ul class="list-group">
-        <li class="list-group-item"><b><u>Empresa:</b></u> <a href="/empresas/{{em.pk}}">{{em.nombre_empresa}}</a></li>
+        <li class="list-group-item"><b><u>Empresa:</b></u> <a href="/empresas/{{em.pk}}">{{em.nombre_empresa}}. Departamento: {{em.departamento}}</a></li>
         <li class="list-group-item"><b><u>Ubicación:</b></u> {{em.ubicacion}}</li>
         <li class="list-group-item"><b><u>Tutor:</b></u> {{em.tutor}}</li>
       </ul>
@@ -32,7 +32,7 @@
       {%for op in opiniones%}
       <ul class="list-group">
         <li class="list-group-item"><b><u>Opinion de:</b></u> {{op.user}}</li>
-        <li class="list-group-item"><b><u>Sobre:</b></u> <a href="/encuesta/detalle/{{op.pk}}">{{op.nombre_empresa}}</a></li>
+        <li class="list-group-item"><b><u>Sobre:</b></u> <a href="/encuesta/detalle/{{op.pk}}">{{op.nombre_empresa}}. Departamento: {{op.departamento}}</a></li>
         <li class="list-group-item"><b><u>Publicada el:</b></u> {{op.created_date}}</li>
       </ul>
       {%endfor%}

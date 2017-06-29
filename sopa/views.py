@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from formtools.wizard.views import SessionWizardView
 import django.utils.encoding
 from django.core.exceptions import *
+import re
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
@@ -53,7 +54,7 @@ def home(request):
     empresa = empresas.objects.all().order_by('created_date')[:5]
     opinion = encuestas.objects.all().order_by('created_date')[:5]
     usuario = usuarios.objects.all().order_by('date_joined')[:5]
-    return render(request, 'sopa/home.html',{'empresas' : empresa, 'opiniones' : opinion, 'usuarios' : usuario})
+    return render(request, 'sopa/home.html',{'titulo': 'Bienvenido a SOPA','empresas' : empresa, 'opiniones' : opinion, 'usuarios' : usuario})
 
 
 class crearempresa(CreateView):
@@ -63,8 +64,8 @@ class crearempresa(CreateView):
         success_url = reverse_lazy('lista_empresas')
 
 def notamedia(e):
-    emp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa)
-    nemp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa).count()
+    emp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor)
+    nemp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).count()
     a = 0
     if nemp != 0:
         for x in emp:
@@ -74,8 +75,11 @@ def notamedia(e):
         print ('media '+ str(media))
         print ('suma puntuaciones ' + str(a))
         print ('numero de encuestas '+ str(nemp))
-        empresas.objects.filter(nombre_empresa = e.nombre_empresa).update(valoracion = media)
-
+        empresas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).update(valoracion = media)
+    else:
+        print ('no hay opiniones')
+        media = 0
+        empresas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).update(valoracion = media)
 
 
 
@@ -84,7 +88,7 @@ def lista_empresas(request):
     empresa = empresas.objects.all()
     for x in empresa:
         notamedia(x)
-    return render(request, 'sopa/lista_empresas.html', {'empresas' : empresa})
+    return render(request, 'sopa/lista_empresas.html', {'titulo': 'SOPA lista empresas' ,'empresas' : empresa})
 
 @login_required
 def miperfil(request):
@@ -95,12 +99,12 @@ def miperfil(request):
         grado = "no especificado"
     print (grado)
     op = encuestas.objects.filter(user = usuario.username).order_by('created_date')
-    return render(request, 'sopa/perfil_usuario.html', {'usuario' : usuario, 'grado' : grado, 'opinion' : op})
+    return render(request, 'sopa/perfil_usuario.html', {'titulo': 'SOPA Mi perfil' ,'usuario' : usuario, 'grado' : grado, 'opinion' : op})
 
 @login_required
 def lista_usuarios(request):
     usuario = usuarios.objects.all()
-    return render(request, 'sopa/lista_alumnos.html', {'alumnos' : usuario})
+    return render(request, 'sopa/lista_alumnos.html', {'titulo': 'SOPA lista usuarios' ,'alumnos' : usuario})
 
 @login_required
 def detalle_usuario(request, u):
@@ -117,12 +121,12 @@ def detalle_usuario(request, u):
     else:
         aux="No ha añadido opiniones"
         opiniones = ""
-    return render(request, 'sopa/detalle_usuario.html', {'usuario' : usuario, 'grado' : grado, 'opiniones' : opiniones})
+    return render(request, 'sopa/detalle_usuario.html', {'titulo': 'Detalle de usuario' ,'usuario' : usuario, 'grado' : grado, 'opiniones' : opiniones})
 
 @login_required
 def detalle_empresa(request, pk):
     empresa = get_object_or_404(empresas, pk = pk)
-    hayopiniones = encuestas.objects.filter(nombre_empresa = empresa.nombre_empresa)
+    hayopiniones = encuestas.objects.filter(nombre_empresa = empresa.nombre_empresa, departamento = empresa.departamento, tutor = empresa.tutor)
     notamedia(empresa)
     if hayopiniones:
         aux=""
@@ -130,12 +134,12 @@ def detalle_empresa(request, pk):
     else:
         aux="No se han aniadido opiniones"
         opiniones = ""
-    return render(request, 'sopa/detalle_empresa.html', {'empresa' : empresa, 'opiniones': opiniones, "aux": aux})
+    return render(request, 'sopa/detalle_empresa.html', {'titulo': 'SOPA Detalle de empresa' ,'empresa' : empresa, 'opiniones': opiniones, "aux": aux})
 
 @login_required
 def lista_encuestas(request):
     encuesta = encuestas.objects.all().order_by('created_date')
-    return render(request, 'sopa/lista_encuestas.html', {'encuestas' : encuesta})
+    return render(request, 'sopa/lista_encuestas.html', {'titulo': 'SOPA Encuestas' ,'encuestas' : encuesta})
 
 
 
@@ -143,7 +147,12 @@ def lista_encuestas(request):
 def detalle_encuesta(request, pk):
     print ("entro en detalle")
     encuesta = get_object_or_404(encuestas, pk = pk)
-    return render(request, 'sopa/detalle_encuesta.html', {'encuesta' : encuesta})
+    a = re.sub("[u']",'',encuesta.pf1)
+    pf1 = a[1:-1]
+    print pf1
+    b = a = re.sub("[u']",'',encuesta.pf2)
+    pf2 = b[1:-1]
+    return render(request, 'sopa/detalle_encuesta.html', {'titulo': 'SOPA Detalle encuesta' ,'encuesta' : encuesta, 'pf1': pf1, 'pf2' : pf2})
 
 class EncuestaWizard(SessionWizardView):
     template_name = "sopa/cuestionario.html"
@@ -159,6 +168,8 @@ class EncuestaWizard(SessionWizardView):
         encuesta = encuestas(
         user = self.request.user,
         nombre_empresa = self.kwargs.get('e', None),
+        departamento = self.kwargs.get('d', None),
+        tutor = self.kwargs.get('t', None),
         created_date = timezone.now(),
         pf1 = datos['pf1'],
         pf11 = datos['pf11'],

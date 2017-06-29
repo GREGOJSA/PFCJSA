@@ -20,6 +20,6 @@ urlpatterns = [
     url(r'^usuarios/$', views.lista_usuarios, name='lista_usuarios'),
     url(r'^usuarios/(?P<u>.+)/$', views.detalle_usuario, name='detalle_usuarios'),
     url(r'^encuesta/$', views.lista_encuestas, name='lista_encuestas'),
-    url(r'^encuesta/nueva/(?P<e>.+)/$', EncuestaWizard.as_view([PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm])),
+    url(r'^encuesta/nueva/(?P<e>.+)/(?P<d>.+)/(?P<t>.+)$', EncuestaWizard.as_view([PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm])),
     url(r'^encuesta/detalle/(?P<pk>.+)/$', views.detalle_encuesta, name='detalle_encuesta'),
     ]

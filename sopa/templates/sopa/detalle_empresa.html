@@ -3,9 +3,10 @@
 <div class ="row col-md-4 col-md-offset-5">
 
 <p>Nombre de la empresa: {{empresa.nombre_empresa}}</p>
+<p>Departamento: {{empresa.departamento}} </p>
 <p>Ubicacion de la empresa: {{empresa.ubicacion}}</p>
 <p>Tutor de la empresa: {{empresa.tutor}}</p>
-<p>Valoración de la empresa: <span class="rating-static rating-{{empresa.valoracion}}0"></span>
+<p>Valoración de las practicas (por departamento y tutor): <span class="rating-static rating-{{empresa.valoracion}}0"></span>
 
 <div id="map" class"map"></div>
     <script>
@@ -40,7 +41,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGVn2aOK_4lrdN3FRn50zfuYzC8l2B148&callback=initMap">
     </script>
 <p>Bloque de opiniones</p>
-<p>Nueva opinión sobre: <a href="/encuesta/nueva/{{empresa.nombre_empresa}}"> {{empresa.nombre_empresa}}</a></p>
+<p>Nueva opinión sobre: <a href="/encuesta/nueva/{{empresa.nombre_empresa}}/{{empresa.departamento}}/{{empresa.tutor}}"> {{empresa.nombre_empresa}}</a></p>
 <p>{{aux}}</p>
 {%for opinion in opiniones%}
 <p>Opinion de: <a href='/encuesta/detalle/{{opinion.pk}}'>{{opinion.user}}</a> Publicada el {{opinion.created_date}}</p>

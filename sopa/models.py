@@ -17,18 +17,17 @@ class empresas (models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     ubicacion = models.TextField(max_length=40,null=True,blank=True,default='')
     tutor = models.TextField(max_length=25,null=True,blank=True,default='')
+    departamento = models.TextField(max_length=20,null=True,blank=True,default='')
     valoracion = models.IntegerField(null=True,blank=True,default='0')
 
-class opiniones (models.Model):
-    # La idea era enlazar con esta tabla pero se utilizara solo la tabla opiniones.
-    user = models.TextField(max_length=20,null=True,blank=True,default='')
-    nombre_empresa = models.TextField(max_length=30,null=True,blank=True,default='')
-    id_encuesta = models.IntegerField(null=True,blank=True,default='0')
+
 
 class encuestas (models.Model):
 
     user = models.TextField(max_length=20,null=True,blank=True,default='')
     nombre_empresa = models.TextField(max_length=30,null=True,blank=True,default='')
+    tutor = models.TextField(max_length=20,null=True,blank=True,default='')
+    departamento = models.TextField(max_length=20,null=True,blank=True,default='')
     id_encuesta = models.IntegerField(null=True,blank=True,default='0')
     created_date = models.DateTimeField(default=timezone.now)
     # Preguntas fundamentales

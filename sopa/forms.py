@@ -29,11 +29,13 @@ class NuevaEmpresaform(forms.ModelForm):
     class Meta:
         model = empresas
         fields = ['nombre_empresa',
+                  'departamento',
                   'ubicacion',
                   'tutor',
         ]
         labels = {
             'nombre_empresa': 'Nombre de la empresa',
+            'departamento' : 'Departamento',
             'ubicacion': 'Ubicacion',
             'tutor': 'Tutor',
         }
@@ -42,7 +44,7 @@ class PreguntasFundamentalesForm(forms.Form):
 
 
         OpcionesPf1 = (
-            ('Programación Web','Programación web'),
+            ('Programacion Web','Programacion web'),
             ('Redes','Redes'),
             ('Big Data','Big Data'),
             ('Programacion de escritorio','Programacion de escritorio'),
