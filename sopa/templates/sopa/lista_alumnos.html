@@ -1,17 +1,13 @@
 {% extends "sopa/index.html" %}
 {% block content %}
 
-<style>     .jumbotron{background-image:'img/bgalumnos.jpg'
+<div class="page-header">
+  <h1>Lista de usuarios. <small>Alumnos registrados en el sitema</small></h1>
 
-                      }
-</style>
-
-<div class="jumbotron">
-  <h1>Bienvenido al SOPA</h1>
-  <p class="lead">Sitema de Opinión sobre Practicas de Alumnos</p>
 </div>
+<br>
+ <div class ="col-md-8 col-md-offset-2">
 
-<div class ="row col-md-4 col-md-offset-5">
 {% for alumno in alumnos %}
   <p> User: <a href= '/usuarios/{{alumno.username}}'>{{alumno.username}}</a> </p>
   <p> Nombre: {{alumno.first_name}} </p>
