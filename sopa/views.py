@@ -85,7 +85,7 @@ def notamedia(e):
 
 @login_required
 def lista_empresas(request):
-    empresa = empresas.objects.all()
+    empresa = empresas.objects.all().order_by('nombre_empresa')
     for x in empresa:
         notamedia(x)
     return render(request, 'sopa/lista_empresas.html', {'titulo': 'SOPA lista empresas' ,'empresas' : empresa})

@@ -7,14 +7,12 @@
 <br>
  <div class ="col-md-8 col-md-offset-2">
    {% for empresa in empresas %}
-    <p> Empresa: <a href= '/empresas/{{empresa.pk}}'>{{empresa.nombre_empresa}}</a>
-    <p> Departamento: {{empresa.departamento}} </p>
-    <p> Ubicacion: {{empresa.ubicacion}} </p>
-    <p> Tutor: {{empresa.tutor}} </p>
-    <p>Valoración de la empresa: <span class="rating-static rating-{{empresa.valoracion}}0"></span>
+    <p><b> Empresa:</b>  {{empresa.nombre_empresa}} <b>Ubicacion:</b>  {{empresa.ubicacion}} </p>
+    <p><b>Departamento:</b>  {{empresa.departamento}} <b>Tutor:</b>  {{empresa.tutor}} </p>
+    <p><b>Valoración de la empresa:</b> <span class="rating-static rating-{{empresa.valoracion}}0"></span></p>
+    <p><a href= '/empresas/{{empresa.pk}}' class="btn btn-success" role="button">
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver detalle</a></span></p>
     <br>
-
-
 
   {% endfor %}
   </div>

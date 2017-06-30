@@ -1,19 +1,35 @@
 {% extends "sopa/index.html" %}
 {% block content %}
+
+</style>
 <div class="page-header">
-  <h1>Detalle de {{empresa.nombre_empresa}}. <small>Departamento: {{empresa.departamento}}. Tutor: {{empresa.tutor}}</small></h1>
+  <h1>Detalle de {{empresa.nombre_empresa}}. <small>Departamento: {{empresa.departamento}}. Tutor: {{empresa.tutor}}</small>  <a href="/encuesta/nueva/{{empresa.nombre_empresa}}/{{empresa.departamento}}/{{empresa.tutor}}"
+     class="btn btn-info" role="button">      Añadir encuesta</a></h1>
 
 </div>
 <br>
- <div class ="col-md-8 ">
+ <div class ="col-md-5 col-md-offset-1 ">
 
-  <p>Nombre de la empresa: {{empresa.nombre_empresa}}</p>
-  <p>Departamento: {{empresa.departamento}} </p>
-  <p>Ubicacion de la empresa: {{empresa.ubicacion}}</p>
-  <p>Tutor de la empresa: {{empresa.tutor}}</p>
-  <p>Valoración de las practicas (por departamento y tutor): <span class="rating-static rating-{{empresa.valoracion}}0"></span>
+  <p><b>Nombre de la empresa:</b> {{empresa.nombre_empresa}}</p>
+  <p><b>Departamento:</b> {{empresa.departamento}} </p>
+  <p><b>Ubicacion de la empresa:</b> {{empresa.ubicacion}}</p>
+  <p><b>Tutor de la empresa:</b> {{empresa.tutor}}</p>
+  <p><b>Valoración de las practicas (por departamento y tutor):</b> <span class="rating-static rating-{{empresa.valoracion}}0"></span>
+
+
+  <h5>Opiniones sobre esta empresa:</h5>
+  {%for opinion in opiniones%}
+  <p>Opinion de: {{opinion.user}} <span class="glyphicon glyphicon-education" aria-hidden="true"></span></a>
+  </p><p>Publicada el {{opinion.created_date}}</p>
+  <p><a href='/encuesta/detalle/{{opinion.pk}}' class="btn btn-success" role="button">
+    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver encuesta</a></span></p>
+  <p>{{aux}}</p>
+
+
+
+  {% endfor %}
 </div>
-<div class ="col-md-4">
+<div class ="col-md-3 ">
   <div id="map" class"map"></div>
     <script>
       function initMap() {
@@ -48,13 +64,6 @@
     </script>
   </div>
 </div>
-<p>Bloque de opiniones</p>
-<p>Nueva opinión sobre: <a href="/encuesta/nueva/{{empresa.nombre_empresa}}/{{empresa.departamento}}/{{empresa.tutor}}"> {{empresa.nombre_empresa}}</a></p>
-<p>{{aux}}</p>
-{%for opinion in opiniones%}
-<p>Opinion de: <a href='/encuesta/detalle/{{opinion.pk}}'>{{opinion.user}}</a> Publicada el {{opinion.created_date}}</p>
-
-{% endfor %}
 
 
 
