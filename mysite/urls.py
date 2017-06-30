@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^encuesta/$', views.lista_encuestas, name='lista_encuestas'),
     url(r'^encuesta/nueva/(?P<e>.+)/(?P<d>.+)/(?P<t>.+)$', EncuestaWizard.as_view([PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm])),
     url(r'^encuesta/detalle/(?P<pk>.+)/$', views.detalle_encuesta, name='detalle_encuesta'),
+    url(r'^encuesta/eliminar/(?P<pk>.+)/$', views.eliminar_encuesta, name='eliminar_encuesta'),
+    url(r'^ayuda/$', views.ayuda, name='ayuda'),
     ]

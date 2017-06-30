@@ -19,8 +19,10 @@
   <p><b>Opinion sobre:</b> {{op.nombre_empresa}} <b>Depatamento:</b> {{op.departamento}}</p>
   <p><b> Tutor:</b> {{op.tutor}}</p>
   <p>Publicada el {{op.created_date}}</p>
-  <p><a href='/encuesta/detalle/{{op.pk}}' class="btn btn-success" role="button">
-    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver encuesta</a></p>
+  <p><a href='/encuesta/detalle/{{op.pk}}' class="btn btn-success" role="button"> Ver encuesta
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+    <a href='/encuesta/eliminar/{{op.pk}}' class="btn btn-danger" role="button"> Eliminar encuesta
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
 
   {% endfor %}
 </div>

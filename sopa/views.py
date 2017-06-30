@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, division
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.generic.edit import FormView
 from django.http.response import HttpResponseRedirect
@@ -148,6 +148,17 @@ def detalle_encuesta(request, pk):
     print ("entro en detalle")
     encuesta = get_object_or_404(encuestas, pk = pk)
     return render(request, 'sopa/detalle_encuesta.html', {'titulo': 'SOPA Detalle encuesta' ,'encuesta' : encuesta})
+
+@login_required
+def eliminar_encuesta(request, pk):
+    print ("elimiando encuesta")
+    encuesta = encuestas.objects.get(pk = pk)
+    encuesta.delete()
+    return redirect('/usuarios/miperfil')
+
+def ayuda(request):
+    titulo = "SOPA. Ayuda"
+    return render(request,'sopa/ayuda.html', {'titulo': 'SOPA Ayuda'})
 
 class EncuestaWizard(SessionWizardView):
     template_name = "sopa/cuestionario.html"

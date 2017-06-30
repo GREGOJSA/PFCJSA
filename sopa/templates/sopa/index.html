@@ -9,7 +9,7 @@
 
 
   <link rel="stylesheet" href="{% static 'css/sopa.css' %}">
-
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
   <link rel="icon" href="{% static 'img/favicon.ico'  %}" type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -33,11 +33,11 @@
           <li><a title="Encuestas" href="/encuesta">Encuestas</a></li>
           <li><a title="Mi perfil" href="/usuarios/miperfil">Mi perfil</a></li>
           <li><a title="Usuarios" href="/usuarios">Usuarios</a></li>
-          <li><a title="Ayuda" href="#">Ayuda</a></li>
+          <li><a title="Ayuda" href="/ayuda">Ayuda</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           {% else %}
           <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Sing In</a></li>
           {% endif %}
@@ -49,4 +49,6 @@
 <body>
 {% block content %}
 {% endblock content %}
+
+
 </body>
