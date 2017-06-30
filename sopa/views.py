@@ -175,7 +175,7 @@ class EncuestaWizard(SessionWizardView):
         print('Encuesta realizada')
         datos={}
         for x in form_list:
-            datos=dict(datos.items()&x.cleaned_data.items())
+            datos=dict(datos.items()+x.cleaned_data.items())
         a = re.sub("[u']",'',str(datos['pf1']))
         pf1str = a[1:-1]
         b = re.sub("[u']",'',str(datos['pf2']))
