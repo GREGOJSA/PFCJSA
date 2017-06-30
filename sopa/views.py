@@ -176,7 +176,6 @@ class EncuestaWizard(SessionWizardView):
         datos={}
         for x in form_list:
             datos=dict(datos.items()+x.cleaned_data.items())
-        [dato.encode("utf8") for dato in datos]
         a = re.sub("[u']",'',str(datos['pf1']))
         pf1str = a[1:-1]
         b = re.sub("[u']",'',str(datos['pf2']))
