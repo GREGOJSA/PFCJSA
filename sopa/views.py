@@ -138,7 +138,7 @@ def detalle_empresa(request, pk):
         aux=""
         opiniones = hayopiniones
     else:
-        aux="No se han añadido opiniones"
+        aux="No se han aniadido opiniones"
         opiniones = ""
     print (aux)
     print (opiniones)
