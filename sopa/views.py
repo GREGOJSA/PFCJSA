@@ -97,7 +97,6 @@ def miperfil(request):
         grado = grados.objects.get(id_grado=usuario.id_grado)
     except ObjectDoesNotExist:
         grado = "no especificado"
-    print (grado)
     op = encuestas.objects.filter(user = usuario.username).order_by('created_date')
     if op:
         aux=""
@@ -119,7 +118,6 @@ def detalle_usuario(request, u):
         grado = grados.objects.get(id_grado=usuario.id_grado)
     except ObjectDoesNotExist:
         grado = "no especificado"
-    print (grado)
     hayopiniones = encuestas.objects.filter(user = usuario)
     if hayopiniones:
         aux=""
@@ -138,10 +136,8 @@ def detalle_empresa(request, pk):
         aux=""
         opiniones = hayopiniones
     else:
-        aux="No se han aniadido opiniones"
+        aux="No se han añiadido opiniones"
         opiniones = ""
-    print (aux)
-    print (opiniones)
     return render(request, 'sopa/detalle_empresa.html', {'titulo': 'SOPA Detalle de empresa' ,'empresa' : empresa, 'opiniones': opiniones, 'aux': aux})
 
 @login_required
@@ -153,13 +149,11 @@ def lista_encuestas(request):
 
 @login_required
 def detalle_encuesta(request, pk):
-    print ("entro en detalle")
     encuesta = get_object_or_404(encuestas, pk = pk)
     return render(request, 'sopa/detalle_encuesta.html', {'titulo': 'SOPA Detalle encuesta' ,'encuesta' : encuesta})
 
 @login_required
 def eliminar_encuesta(request, pk):
-    print ("elimiando encuesta")
     encuesta = encuestas.objects.get(pk = pk)
     encuesta.delete()
     return redirect('/usuarios/miperfil')
