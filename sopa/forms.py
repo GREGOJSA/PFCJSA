@@ -63,7 +63,7 @@ class PreguntasFundamentalesForm(forms.Form):
             ('Transporte','Transporte'),
             ('Economica','Economica'),
             ('Bono comida','Bono comida'),
-            ('Ninguna','Ninguna'),
+            ('Nada','Nada'),
         )
 
         pf2 = forms.MultipleChoiceField(label = 'Ayudas *',

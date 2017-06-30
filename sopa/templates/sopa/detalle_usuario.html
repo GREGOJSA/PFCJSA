@@ -9,14 +9,15 @@
 <p><b> Usuario:</b> {{usuario.username}} </p>
 <p><b> Nombre:</b> {{usuario.first_name}} </p>
 <p><b> Apellido:</b> {{usuario.last_name}} </p>
-<p><b> mail:</b> {{usuario.email}} </p>
+<p><b> Mail:</b> {{usuario.email}} </p>
 <p><b> Grado:</b> {{grado}}{{grado.nombre_grado}} </p>
 <p><b> Fecha de alta:</b> {{usuario.date_joined}}</p>
 </div>
 <div class ="col-md-4" >
   <h4> Opiniones que ha aportado: </h4>
+  <p>{{aux}}</p>
   {%for op in opiniones%}
-  <p><b>Opinion sobre:</b> {{op.nombre_empresa}} <b>Depatamento:</b> {{op.departamento}}</p>
+  <p><b>Opinión sobre:</b> {{op.nombre_empresa}} <b>Depatamento:</b> {{op.departamento}}</p>
   <p><b> Tutor:</b> {{op.tutor}}</p>
   <p>Publicada el {{op.created_date}}</p>
   <p><a href='/encuesta/detalle/{{op.pk}}' class="btn btn-success" role="button">

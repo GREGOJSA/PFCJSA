@@ -99,7 +99,13 @@ def miperfil(request):
         grado = "no especificado"
     print (grado)
     op = encuestas.objects.filter(user = usuario.username).order_by('created_date')
-    return render(request, 'sopa/perfil_usuario.html', {'titulo': 'SOPA Mi perfil' ,'usuario' : usuario, 'grado' : grado, 'opinion' : op})
+    if op:
+        aux=""
+        opiniones = op
+    else:
+        aux="No he añadido opiniones"
+        opiniones = ""
+    return render(request, 'sopa/perfil_usuario.html', {'titulo': 'SOPA Mi perfil' ,'usuario' : usuario, 'grado' : grado, 'opinion' : opiniones, 'aux' : aux})
 
 @login_required
 def lista_usuarios(request):
@@ -121,7 +127,7 @@ def detalle_usuario(request, u):
     else:
         aux="No ha añadido opiniones"
         opiniones = ""
-    return render(request, 'sopa/detalle_usuario.html', {'titulo': 'Detalle de usuario' ,'usuario' : usuario, 'grado' : grado, 'opiniones' : opiniones})
+    return render(request, 'sopa/detalle_usuario.html', {'titulo': 'Detalle de usuario' ,'usuario' : usuario, 'grado' : grado, 'opiniones' : opiniones, 'aux':aux})
 
 @login_required
 def detalle_empresa(request, pk):
@@ -132,9 +138,11 @@ def detalle_empresa(request, pk):
         aux=""
         opiniones = hayopiniones
     else:
-        aux="No se han aniadido opiniones"
+        aux="No se han añadido opiniones"
         opiniones = ""
-    return render(request, 'sopa/detalle_empresa.html', {'titulo': 'SOPA Detalle de empresa' ,'empresa' : empresa, 'opiniones': opiniones, "aux": aux})
+    print (aux)
+    print (opiniones)
+    return render(request, 'sopa/detalle_empresa.html', {'titulo': 'SOPA Detalle de empresa' ,'empresa' : empresa, 'opiniones': opiniones, 'aux': aux})
 
 @login_required
 def lista_encuestas(request):
@@ -172,7 +180,7 @@ class EncuestaWizard(SessionWizardView):
         a = re.sub("[u']",'',str(datos['pf1']))
         pf1str = a[1:-1]
         b = re.sub("[u']",'',str(datos['pf2']))
-        pf2str = a[1:-1]
+        pf2str = b[1:-1]
         encuesta = encuestas(
         user = self.request.user,
         nombre_empresa = self.kwargs.get('e', None),
