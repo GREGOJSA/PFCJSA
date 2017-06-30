@@ -51,9 +51,9 @@ class RegistroUsuario(CreateView):
 
 
 def home(request):
-    empresa = empresas.objects.all().order_by('created_date')[:5]
-    opinion = encuestas.objects.all().order_by('created_date')[:5]
-    usuario = usuarios.objects.all().order_by('date_joined')[:5]
+    empresa = empresas.objects.all().order_by('-created_date')[:5]
+    opinion = encuestas.objects.all().order_by('-created_date')[:5]
+    usuario = usuarios.objects.all().order_by('-date_joined')[:5]
     return render(request, 'sopa/home.html',{'titulo': 'Bienvenido a SOPA','empresas' : empresa, 'opiniones' : opinion, 'usuarios' : usuario})
 
 
@@ -136,7 +136,7 @@ def detalle_empresa(request, pk):
         aux=""
         opiniones = hayopiniones
     else:
-        aux="No se han añiadido opiniones"
+        aux="No se han añadido opiniones"
         opiniones = ""
     return render(request, 'sopa/detalle_empresa.html', {'titulo': 'SOPA Detalle de empresa' ,'empresa' : empresa, 'opiniones': opiniones, 'aux': aux})
 
