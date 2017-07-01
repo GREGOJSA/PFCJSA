@@ -7,8 +7,9 @@
 <br>
  <div class ="col-md-8 col-md-offset-2">
    {% for empresa in empresas %}
-    <p><b> Empresa:</b>  {{empresa.nombre_empresa}} <b>Ubicacion:</b>  {{empresa.ubicacion}} </p>
-    <p><b>Departamento:</b>  {{empresa.departamento}} <b>Tutor:</b>  {{empresa.tutor}} </p>
+    <p><b>Empresa:</b>  {{empresa.nombre_empresa}} <b>Departamento:</b>  {{empresa.departamento}}
+    <p><b>Tutor:</b>  {{empresa.tutor}} <b>Ubicacion:</b>  {{empresa.ubicacion}} </p>
+
     <p><b>Valoración de la empresa:</b>
       {%if empresa.valoracion != 0%} <span class="rating-static rating-{{empresa.valoracion}}0"></span></p>
       {%else%} No hay valoraciones</p>

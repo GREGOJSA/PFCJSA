@@ -52,12 +52,12 @@ class PreguntasFundamentalesForm(forms.Form):
             ('Economia','Economia'),
             ('Electronica','Electronica'),
         )
-        pf1 = forms.MultipleChoiceField(label = 'Temáticas *',
+        pf1 = forms.MultipleChoiceField(label = '*Temáticas',
                                         widget = forms.CheckboxSelectMultiple,
                                         choices=OpcionesPf1,
                                         )
 
-        pf11 = forms.CharField(label = 'Otras tematicas *', initial="Ninguna")
+        pf11 = forms.CharField(label = 'Otras tematicas', initial="Ninguna")
 
         OpcionesPf2 = (
             ('Transporte','Transporte'),
@@ -66,14 +66,14 @@ class PreguntasFundamentalesForm(forms.Form):
             ('Nada','Nada'),
         )
 
-        pf2 = forms.MultipleChoiceField(label = 'Ayudas *',
+        pf2 = forms.MultipleChoiceField(label = '*Ayudas',
                                         widget = forms.CheckboxSelectMultiple,
                                         choices=OpcionesPf2
                                         )
         pf22 = forms.CharField(label = 'Otras ayudas', initial="Ninguna")
 
         OpcionesPf3 = [(1 , 'Muy mala'),(2 , 'Mala'),(3 , 'Normal'),(4 , 'Buena' ), (5 , 'Muy buena')]
-        nota = forms.ChoiceField(label = 'Opinión general sobre la empresa *',
+        nota = forms.ChoiceField(label = '*Opinión general sobre la empresa',
                                choices = OpcionesPf3,
                                widget = forms.RadioSelect(),
                                )
