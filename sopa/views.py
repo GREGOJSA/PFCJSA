@@ -3,7 +3,7 @@ from __future__ import unicode_literals, division
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.views.generic.edit import FormView
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponseNotFound
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
@@ -155,8 +155,13 @@ def detalle_encuesta(request, pk):
 @login_required
 def eliminar_encuesta(request, pk):
     encuesta = encuestas.objects.get(pk = pk)
-    encuesta.delete()
-    return redirect('/usuarios/miperfil')
+    print (request.user)
+    print (encuesta.user)
+    if str(request.user) == str(encuesta.user):
+        encuesta.delete()
+        return redirect('/usuarios/miperfil')
+    else:
+        return HttpResponseNotFound()
 
 def ayuda(request):
     titulo = "SOPA. Ayuda"
