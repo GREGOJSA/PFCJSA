@@ -3,7 +3,10 @@
 {% block content %}
 {% load i18n %}
 
-
+<div class="container">
+    <br />
+    <br />
+    <br />
 
 
   <br>
@@ -28,17 +31,17 @@
   {% endif %}
   </table>
   <br>
+  <a href='/empresas/' class="btn btn-danger" role="button">Cancelar</a>
   {% if wizard.steps.prev %}
   <button name="wizard_goto_step" class="btn btn-primary"   type="submit" value="{{ wizard.steps.first }}">Primer Paso</button>
   <button name="wizard_goto_step" class="btn btn-warning" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
   {% endif %}
   <input type="submit" class="btn btn-success" </input>
-  <a href='/empresas/' class="btn btn-danger" role="button">Cancelar</a>
   <br>
   </form>
   <br>
 </div>
 </div>
 </div>
-
+</div>
 {% endblock %}
