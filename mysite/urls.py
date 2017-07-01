@@ -4,7 +4,7 @@ from django.contrib.auth.views import logout
 from django.contrib import admin
 from sopa.views import *
 from sopa import views
-from django.conf.urls import handler404, handler500
+
 
 
 
@@ -26,6 +26,3 @@ urlpatterns = [
     url(r'^encuesta/eliminar/(?P<pk>.+)/$', views.eliminar_encuesta, name='eliminar_encuesta'),
     url(r'^ayuda/$', views.ayuda, name='ayuda'),
     ]
-
-handler400 = 'sopa.views.handler404'
-handler500 = 'sopa.views.handler500'
