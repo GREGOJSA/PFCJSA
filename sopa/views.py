@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, division
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.utils import timezone
 from django.views.generic.edit import FormView
 from django.http.response import HttpResponseRedirect, HttpResponseNotFound
@@ -16,6 +16,8 @@ from formtools.wizard.views import SessionWizardView
 import django.utils.encoding
 from django.core.exceptions import *
 import re
+from django.template import RequestContext
+
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
@@ -208,3 +210,15 @@ class EncuestaWizard(SessionWizardView):
 
 
         return HttpResponseRedirect("/empresas/")
+
+def handler404(request):
+    response = render_to_response('sopa/404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+def handler500(request):
+    response = render_to_response('sopa/500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
