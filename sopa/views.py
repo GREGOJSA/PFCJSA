@@ -93,6 +93,19 @@ def lista_empresas(request):
     return render(request, 'sopa/lista_empresas.html', {'titulo': 'SOPA lista empresas' ,'empresas' : empresa})
 
 @login_required
+def buscar_empresa(request):
+    q = request.GET.get('e')
+    empresa = empresas.objects.filter(nombre_empresa__contains = q)
+    if empresa:
+        print ('hay resultados')
+        aux = ""
+    else:
+        print ('NO hay resultados')
+        aux = "No hay resultados"
+    return render(request, 'sopa/buscar_empresas.html', {'empresas' : empresa, 'aux' : aux})
+
+
+@login_required
 def miperfil(request):
     usuario = get_object_or_404(usuarios, username = request.user)
     try:

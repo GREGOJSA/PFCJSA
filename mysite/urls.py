@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^new_user$', RegistroUsuario.as_view(), name='nuevo_usuario'),
     url(r'^empresas/$', views.lista_empresas, name='lista_empresas'),
     url(r'^empresas/new/$', crearempresa.as_view(), name='nueva_Empresa'),
+    url(r'^buscar/$', views.buscar_empresa, name='buscar_empresa'),
     url(r'^empresas/(?P<pk>.+)/$', views.detalle_empresa, name='detalle_empresa'),
     url(r'^usuarios/miperfil/$', views.miperfil, name='mi_perfil'),
     url(r'^usuarios/$', views.lista_usuarios, name='lista_usuarios'),
