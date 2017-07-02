@@ -101,7 +101,7 @@ def buscar_empresa(request):
         aux = ""
     else:
         print ('NO hay resultados')
-        aux = "No hay resultados"
+        aux = "No hay resultados para: "'"' + str(q) + '"'
     return render(request, 'sopa/buscar_empresas.html', {'empresas' : empresa, 'aux' : aux})
 
 

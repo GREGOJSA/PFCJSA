@@ -23,10 +23,13 @@
 
 
 <div class ="col-md-5 col-md-offset-1">
+  <h3>Resultado de la búsqueda: </h3>
   <h3>{{aux}}</h3>
   {% for empresa in empresas %}
-   <p><b>Empresa:</b>  {{empresa.nombre_empresa}} <b>Departamento:</b>  {{empresa.departamento}}
-   <p><b>Tutor:</b>  {{empresa.tutor}} <b>Ubicacion:</b>  {{empresa.ubicacion}} </p>
+  <h3><u>{{empresa.nombre_empresa}}</u></h3>
+  <p><b>Departamento:</b>  {{empresa.departamento}}</p>
+  <p><b>Tutor:</b>  {{empresa.tutor}}<br> </p>
+  <p><b>Ubicacion:</b>  {{empresa.ubicacion}} </p>
 
    <p><b>Valoración de la empresa:</b>
      {%if empresa.valoracion != 0%} <span class="rating-static rating-{{empresa.valoracion}}0"></span></p>
