@@ -4,15 +4,15 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
-class usuarios (AbstractUser):
+class usuarios(AbstractUser):
     # Hereda de la clase user e icorpora el id grado para identifical al titulacion
     id_grado = models.IntegerField(null=True,blank=True,default='0')
 
-class grados (models.Model):
+class grados(models.Model):
     id_grado = models.IntegerField(null=True,blank=True)
     nombre_grado = models.TextField(null=True,blank=True,default='')
 
-class empresas (models.Model):
+class empresas(models.Model):
     nombre_empresa = models.TextField(max_length=30,null=True,blank=True,default='')
     created_date = models.DateTimeField(default=timezone.now)
     ubicacion = models.TextField(max_length=40,null=True,blank=True,default='')
@@ -20,9 +20,7 @@ class empresas (models.Model):
     departamento = models.TextField(max_length=20,null=True,blank=True,default='')
     valoracion = models.IntegerField(null=True,blank=True,default='0')
 
-
-
-class encuestas (models.Model):
+class encuestas(models.Model):
 
     user = models.TextField(max_length=20,null=True,blank=True,default='')
     nombre_empresa = models.TextField(max_length=30,null=True,blank=True,default='')

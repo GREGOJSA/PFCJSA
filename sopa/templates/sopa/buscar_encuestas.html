@@ -30,10 +30,10 @@
   <p>Creada por <strong>{{encuesta.user}}</strong> el {{encuesta.created_date}}</p>
 
 
-   <p><b>Valoración de la empresa por el usuario:</b>
-     {%if encuesta.valoracion != 0%} <span class="rating-static rating-{{empresa.valoracion}}0"></span></p>
-     {%else%} No hay valoraciones</p>
-     {%endif%}
+  <p><b>Valoración por parte del alumno:</b>
+    {%if encuesta.nota != 0%} <span class="rating-static rating-{{encuesta.nota}}0"></span></p>
+    {%else%} No hay valoraciones</p>
+    {%endif%}
    <p><a href= '/empresas/{{empresa.pk}}' class="btn btn-primary" role="button">
      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver detalle</a></span>
      <a href= "/encuesta/nueva/{{empresa.nombre_empresa}}/{{empresa.departamento}}/{{empresa.tutor}}"  class="btn btn-success" role="button">

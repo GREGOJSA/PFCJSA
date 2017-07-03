@@ -6,7 +6,7 @@ from sopa.views import *
 from sopa import views
 
 
-
+# manage.py migrate --run-syncdb
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
