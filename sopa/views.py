@@ -73,13 +73,8 @@ def notamedia(e):
         for x in emp:
             a = a + int(x.nota)
         media = a / nemp
-        print ('obtenida media de '+x.nombre_empresa)
-        print ('media '+ str(media))
-        print ('suma puntuaciones ' + str(a))
-        print ('numero de encuestas '+ str(nemp))
         empresas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).update(valoracion = media)
     else:
-        print ('no hay opiniones')
         media = 0
         empresas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).update(valoracion = media)
 
@@ -193,8 +188,6 @@ def detalle_encuesta(request, pk):
 @login_required
 def eliminar_encuesta(request, pk):
     encuesta = encuestas.objects.get(pk = pk)
-    print (request.user)
-    print (encuesta.user)
     if str(request.user) == str(encuesta.user):
         encuesta.delete()
         return redirect('/usuarios/miperfil')
@@ -209,7 +202,6 @@ class EncuestaWizard(SessionWizardView):
     template_name = "sopa/cuestionario.html"
 
     def done(self, form_list, **kwargs):
-        print('Encuesta realizada')
         datos={}
         for x in form_list:
             datos=dict(datos.items()+x.cleaned_data.items())
