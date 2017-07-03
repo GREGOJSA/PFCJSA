@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
-
+class BusquedaForm(forms.Form):
+    e = forms.CharField(label='e', max_length=20)
 
 class RegistroForm(UserCreationForm):
 

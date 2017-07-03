@@ -94,16 +94,39 @@ def lista_empresas(request):
 
 @login_required
 def buscar_empresa(request):
-    q = request.GET.get('e')
-    empresa = empresas.objects.filter(nombre_empresa__contains = q)
-    if empresa:
-        print ('hay resultados')
-        aux = ""
-    else:
-        print ('NO hay resultados')
-        aux = "No hay resultados para: "'"' + str(q) + '"'
-    return render(request, 'sopa/buscar_empresas.html', {'empresas' : empresa, 'aux' : aux})
+    if request.method == 'POST':
+        form = BusquedaForm(request.POST)
+        if form.is_valid():
+            q = str(form.cleaned_data['e'])
+            empresa = empresas.objects.filter(nombre_empresa__contains = q)
+            if empresa:
+                aux = ""
+            else:
+                aux = "No hay resultados para: "'"' + str(q) + '"'
+            return render(request, 'sopa/buscar_empresas.html', {'empresas' : empresa, 'aux' : aux})
+        else:
+            return HttpResponseRedirect('/empresas')
 
+    else:
+        return HttpResponseRedirect('/empresas')
+
+@login_required
+def buscar_encuesta(request):
+    if request.method == 'POST':
+        form = BusquedaForm(request.POST)
+        if form.is_valid():
+            q = str(form.cleaned_data['e'])
+            encuesta = encuestas.objects.filter(nombre_empresa__contains = q)
+            if encuesta:
+                aux = ""
+            else:
+                aux = "No hay resultados para: "'"' + str(q) + '"'
+            return render(request, 'sopa/buscar_encuestas.html', {'encuestas' : encuesta, 'aux' : aux})
+        else:
+            return HttpResponseRedirect('/encuesta')
+
+    else:
+        return HttpResponseRedirect('/encuesta')
 
 @login_required
 def miperfil(request):

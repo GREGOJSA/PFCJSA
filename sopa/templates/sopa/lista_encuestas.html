@@ -8,13 +8,20 @@
     <br />
     <br />
     <br />
- <div class ="col-md-8 col-md-offset-2">
-
-
+ <div class="col-md-3 col-md-offset-2">
+     <h4> Búsqueda de encuestas: </h4>
+   <form action="/encuesta/buscar/" method="POST">
+     {% csrf_token %}
+   <label for= "e">Nombre de la empresa:</label>
+   <input id="e" type="text" class="form-control" name = "e" ><br>
+   <button type="submit" class="btn btn-primary" value="Buscar"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
+   </form>
+   </div>
+<div class ="col-md-5 col-md-offset-1">
   {%for encuesta in encuestas%}
   <p><b>Opinion sobre:</b> {{encuesta.nombre_empresa}}.<b> Departamento</b> {{encuesta.departamento}}</p>
   <p><b>Tutor: </b>{{encuesta.tutor}}</p>
-  <p>Creada por {{encuesta.user}} el {{encuesta.created_date}}</p>
+  <p>Creada por <strong>{{encuesta.user}}</strong> el {{encuesta.created_date}}</p>
   <p><a href= '/encuesta/detalle/{{encuesta.pk}}' class="btn btn-primary" role="button">
     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver encuesta</a></span>
     <a href="/encuesta/nueva/{{encuesta.nombre_empresa}}/{{encuesta.departamento}}/{{encuesta.tutor}}" class="btn btn-success" role="button">
@@ -24,4 +31,6 @@
 {% endfor %}
 </div>
 </div>
+
+
 {% endblock content %}
