@@ -245,4 +245,4 @@ class EncuestaWizard(SessionWizardView):
         encuesta.save()
 
 
-        return HttpResponseRedirect("/empresas/")
+        return HttpResponseRedirect("/encuesta/detalle/"+str(encuesta.pk))
