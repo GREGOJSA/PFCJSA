@@ -97,7 +97,7 @@ def buscar_empresa(request):
     if request.method == 'POST':
         form = BusquedaForm(request.POST)
         if form.is_valid():
-            q = str(form.cleaned_data['e'])
+            q = form.cleaned_data['e']
             empresa = empresas.objects.filter(nombre_empresa__contains = q)
             if empresa:
                 aux = ""
