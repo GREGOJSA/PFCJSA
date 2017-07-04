@@ -17,17 +17,21 @@
 <p><b> Fecha de alta:</b> {{usuario.date_joined}}</p>
 </div>
 <div class ="col-md-4" >
-  <h4> Opiniones que he aportado: </h4>
+  <h4> Opiniones que he aportado: </h4><br>
   <p>{{aux}}</p>
   {%for op in opinion%}
   <p><b>Opinion sobre:</b> {{op.nombre_empresa}} <b>Depatamento:</b> {{op.departamento}}</p>
   <p><b> Tutor:</b> {{op.tutor}}</p>
   <p>Publicada el {{op.created_date}}</p>
+  <p><b>Mi valoración de la empresa:</b>
+    {%if op.nota != 0%} <span class="rating-static rating-{{op.nota}}0"></span></p>
+    {%else%} No hay valoraciones</p>
+    {%endif%}
   <p><a href='/encuesta/detalle/{{op.pk}}' class="btn btn-success" role="button"> Ver encuesta
       <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
     <a href='/encuesta/eliminar/{{op.pk}}' class="btn btn-danger" role="button"> Eliminar encuesta
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></p>
-
+<br>
   {% endfor %}
 </div>
 </div>

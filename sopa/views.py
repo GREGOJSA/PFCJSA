@@ -17,7 +17,7 @@ import django.utils.encoding
 from django.core.exceptions import *
 import re
 from django.template import RequestContext
-
+from django.core.urlresolvers import reverse
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
@@ -63,7 +63,11 @@ class crearempresa(CreateView):
         model = empresas
         template_name = "sopa/nueva_empresa.html"
         form_class = NuevaEmpresaform
-        success_url = reverse_lazy('lista_empresas')
+        def form_valid(self, form):
+            empresa = form.save(commit=False)
+            empresa.save()
+            a = empresa.pk
+            return HttpResponseRedirect("/empresas/"+str(a))
 
 def notamedia(e):
     emp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor)

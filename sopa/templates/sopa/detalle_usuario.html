@@ -23,6 +23,10 @@
   <p><b>Opinión sobre:</b> {{op.nombre_empresa}} <b>Depatamento:</b> {{op.departamento}}</p>
   <p><b> Tutor:</b> {{op.tutor}}</p>
   <p>Publicada el {{op.created_date}}</p>
+  <p><b>Valoración por parte del alumno:</b>
+    {%if op.nota != 0%} <span class="rating-static rating-{{op.nota}}0"></span></p>
+    {%else%} No hay valoraciones</p>
+    {%endif%}
   <p><a href='/encuesta/detalle/{{op.pk}}' class="btn btn-primary" role="button">
     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver encuesta</a>
     <a href= "/encuesta/nueva/{{op.nombre_empresa}}/{{op.departamento}}/{{op.tutor}}"  class="btn btn-success" role="button">

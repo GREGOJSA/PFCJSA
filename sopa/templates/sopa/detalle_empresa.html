@@ -16,7 +16,7 @@
   <p><b>Departamento:</b> {{empresa.departamento}} </p>
   <p><b>Ubicacion de la empresa:</b> {{empresa.ubicacion}}</p>
   <p><b>Tutor de la empresa:</b> {{empresa.tutor}}</p>
-  <p><b>Valoración de las practicas (por departamento y tutor):</b> {%if empresa.valoracion != 0%} <span class="rating-static rating-{{empresa.valoracion}}0"></span></p>
+  <p><b>Valoración general de las practicas (por departamento y tutor):</b><br> {%if empresa.valoracion != 0%} <span class="rating-static rating-{{empresa.valoracion}}0"></span></p>
   {%else%} No hay valoraciones</p>
   {%endif%}
   <br>
@@ -29,6 +29,10 @@
   {%for opinion in opiniones%}
   <p>Opinion de: {{opinion.user}} <span class="glyphicon glyphicon-education" aria-hidden="true"></span></a>
   </p><p>Publicada el {{opinion.created_date}}</p>
+  <p><b>Valoración por parte del alumno:</b>
+    {%if opinion.nota != 0%} <span class="rating-static rating-{{opinion.nota}}0"></span></p>
+    {%else%} No hay valoraciones</p>
+    {%endif%}
   <p><a href='/encuesta/detalle/{{opinion.pk}}' class="btn btn-success" role="button">
     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>    ver encuesta</a></span></p>
 
