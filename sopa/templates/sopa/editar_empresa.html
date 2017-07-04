@@ -1,7 +1,7 @@
 {% extends "sopa/index.html" %}
 {% block content %}
 <div class="page-header">
-  <h1>&nbsp;Crear nueva empresa. <small>Alta de nueva empresa</small></h1>
+  <h1>&nbsp;Editar empresa. <small>Edición de nueva empresa</small></h1>
 
 </div>
 <div class="container">
@@ -9,6 +9,7 @@
     <br />
     <br />
 <form method="POST" >{% csrf_token %}
+
 <div class="form-group row col-md-4 col-md-offset-4">
   <label  class=" col-form-label">Nombre de la empresa</label>
   <div class="col-10">

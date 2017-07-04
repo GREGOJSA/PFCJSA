@@ -8,8 +8,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib import auth
-from django.views.generic import CreateView
-from .forms import *
+from django.views.generic import CreateView, UpdateView
+from .forms import BusquedaForm, RegistroForm, NuevaEmpresaform, PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm
 from .models import *
 from django.contrib.auth.decorators import login_required
 from formtools.wizard.views import SessionWizardView
@@ -18,6 +18,7 @@ from django.core.exceptions import *
 import re
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
@@ -69,6 +70,29 @@ class crearempresa(CreateView):
             a = empresa.pk
             return HttpResponseRedirect("/empresas/"+str(a))
 
+
+
+class editarempresa(UpdateView):
+        model = empresas
+        template_name = "sopa/editar_empresa.html"
+        form_class = NuevaEmpresaform
+        def get_initial(self, *args, **kwargs):
+            emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
+            self.initial = super(editarempresa, self).get_initial()
+            print self.initial
+            self.initial['Nombre_empresa']=emp.nombre_empresa
+            self.initial['departamento']=emp.departamento
+            self.initial['ubicacion']=emp.ubicacion
+            self.initial['tutor']=emp.tutor
+            print self.initial
+            return self.initial
+        def form_valid(self, form):
+            emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
+            empresa = form.save(commit=False)
+            emp.save()
+            a = emp.pk
+            return HttpResponseRedirect("/empresas/"+str(a))
+
 def notamedia(e):
     emp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor)
     nemp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).count()
@@ -87,9 +111,39 @@ def notamedia(e):
 @login_required
 def lista_empresas(request):
     empresa = empresas.objects.all().order_by('nombre_empresa')
+    paginator = Paginator(empresa, 10) # Show 5 contacts per page
+    page = request.GET.get('page')
+    try:
+        empresasl = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        empresasl = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        empresasl = paginator.page(paginator.num_pages)
+
     for x in empresa:
         notamedia(x)
-    return render(request, 'sopa/lista_empresas.html', {'titulo': 'SOPA lista empresas' ,'empresas' : empresa})
+    return render(request, 'sopa/lista_empresas.html', {'titulo': 'SOPA lista empresas' ,'empresas' : empresasl})
+
+
+@login_required
+def lista_encuestas(request):
+    encuesta = encuestas.objects.all().order_by('created_date')
+    paginator = Paginator(encuesta, 10) # Show 5 contacts per page
+    page = request.GET.get('page')
+    try:
+        encuestal = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        encuestal = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        encuestal = paginator.page(paginator.num_pages)
+    return render(request, 'sopa/lista_encuestas.html', {'titulo': 'SOPA Encuestas' ,'encuestas' : encuestal})
+
+
+
 
 @login_required
 def buscar_empresa(request):
@@ -176,11 +230,6 @@ def detalle_empresa(request, pk):
         aux="No se han añadido opiniones"
         opiniones = ""
     return render(request, 'sopa/detalle_empresa.html', {'titulo': 'SOPA Detalle de empresa' ,'empresa' : empresa, 'opiniones': opiniones, 'aux': aux})
-
-@login_required
-def lista_encuestas(request):
-    encuesta = encuestas.objects.all().order_by('created_date')
-    return render(request, 'sopa/lista_encuestas.html', {'titulo': 'SOPA Encuestas' ,'encuestas' : encuesta})
 
 
 
