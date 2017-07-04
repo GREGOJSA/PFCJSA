@@ -9,8 +9,22 @@
     <br />
     <br />
     <br />
- <div class ="col-md-8 col-md-offset-2">
+    <div class="col-md-3 col-md-offset-2">
+      <h4> Búsqueda de Alumnos: </h4>
 
+
+        <form action="/usuarios/buscar/" method="POST">
+          {% csrf_token %}
+        <label for= "e">Nombre del alumno:</label>
+        <input id="e" type="text" class="form-control" name = "e" ><br>
+        <button type="submit" class="btn btn-primary" value="Buscar"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
+        </form>
+
+
+   <br>
+   <br>
+ </div>
+<div class ="col-md-5 col-md-offset-1">
 {% for alumno in alumnos %}
   <p><b> Usuario:</b> {{alumno.username}} </p>
   <p><b> Nombre:</b> {{alumno.first_name}} </p>

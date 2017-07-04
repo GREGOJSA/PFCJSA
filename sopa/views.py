@@ -8,7 +8,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib import auth
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView
+from django.views.generic.edit import UpdateView
 from .forms import BusquedaForm, RegistroForm, NuevaEmpresaform, PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm
 from .models import *
 from django.contrib.auth.decorators import login_required
@@ -19,6 +20,7 @@ import re
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 TEMPLATES = {"cuestionario", "sopa/cuestionario.html"}
 
@@ -73,25 +75,28 @@ class crearempresa(CreateView):
 
 
 class editarempresa(UpdateView):
-        model = empresas
-        template_name = "sopa/editar_empresa.html"
-        form_class = NuevaEmpresaform
-        def get_initial(self, *args, **kwargs):
-            emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
-            self.initial = super(editarempresa, self).get_initial()
-            print self.initial
-            self.initial['Nombre_empresa']=emp.nombre_empresa
-            self.initial['departamento']=emp.departamento
-            self.initial['ubicacion']=emp.ubicacion
-            self.initial['tutor']=emp.tutor
-            print self.initial
-            return self.initial
-        def form_valid(self, form):
-            emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
-            empresa = form.save(commit=False)
-            emp.save()
-            a = emp.pk
-            return HttpResponseRedirect("/empresas/"+str(a))
+    model = empresas
+    template_name = "sopa/editar_empresa.html"
+    form_class = NuevaEmpresaform
+
+    def get_initial(self, **kwargs):
+        initial = super(editarempresa, self).get_initial()
+        emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
+        print emp.nombre_empresa
+        print initial
+        initial['nombre_empresa']=emp.nombre_empresa
+        initial['departamento']=emp.departamento
+        initial['ubicacion']=emp.ubicacion
+        initial['tutor']=emp.tutor
+        print initial
+        return initial
+    def form_valid(self, form):
+        emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
+        empresa = form.save(commit=False)
+        emp.save()
+        a = emp.pk
+        return HttpResponseRedirect("/empresas/"+str(a))
+
 
 def notamedia(e):
     emp = encuestas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor)
@@ -111,7 +116,7 @@ def notamedia(e):
 @login_required
 def lista_empresas(request):
     empresa = empresas.objects.all().order_by('nombre_empresa')
-    paginator = Paginator(empresa, 10) # Show 5 contacts per page
+    paginator = Paginator(empresa, 5) # Show 5 contacts per page
     page = request.GET.get('page')
     try:
         empresasl = paginator.page(page)
@@ -180,6 +185,25 @@ def buscar_encuesta(request):
 
     else:
         return HttpResponseRedirect('/encuesta')
+
+
+@login_required
+def buscar_usuario(request):
+    if request.method == 'POST':
+        form = BusquedaForm(request.POST)
+        if form.is_valid():
+            q = str(form.cleaned_data['e'])
+            alumno = usuarios.objects.filter(Q(first_name__contains = q) | Q(last_name__contains = q) | Q(username__contains = q))
+            if alumno:
+                aux = ""
+            else:
+                aux = "No hay resultados para: "'"' + str(q) + '"'
+            return render(request, 'sopa/buscar_usuarios.html', {'usuarios' : alumno, 'aux' : aux})
+        else:
+            return HttpResponseRedirect('/usuarios')
+
+    else:
+        return HttpResponseRedirect('/usuarios')
 
 @login_required
 def miperfil(request):

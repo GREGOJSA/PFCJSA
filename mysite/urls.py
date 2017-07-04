@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^empresas/buscar/$', views.buscar_empresa, name='buscar_empresa'),
     url(r'^empresas/(?P<pk>.+)/$', views.detalle_empresa, name='detalle_empresa'),
     url(r'^usuarios/miperfil/$', views.miperfil, name='mi_perfil'),
+    url(r'^usuarios/buscar/$', views.buscar_usuario, name='buscar_usuario'),
     url(r'^usuarios/$', views.lista_usuarios, name='lista_usuarios'),
     url(r'^usuarios/(?P<u>.+)/$', views.detalle_usuario, name='detalle_usuarios'),
     url(r'^encuesta/$', views.lista_encuestas, name='lista_encuestas'),
