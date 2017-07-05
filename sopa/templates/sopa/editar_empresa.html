@@ -1,4 +1,5 @@
 {% extends "sopa/index.html" %}
+{% load widget_tweaks %}
 {% block content %}
 <div class="page-header">
   <h1>&nbsp;Editar empresa. <small>Edición de los datos de empresa</small></h1>
@@ -13,29 +14,29 @@
 <div class="form-group row col-md-4 col-md-offset-4">
   <label  class=" col-form-label">Nombre de la empresa</label>
   <div class="col-10">
-    <input class="form-control" type="text" name="nombre_empresa" >
+    {{ form.nombre_empresa|attr:"rows:1"|attr:"cols:30"|add_class:"form-control"}}
   </div>
 </div>
 <div class="form-group row col-md-4 col-md-offset-4">
   <label  class=" col-form-label">Departamento</label>
   <div class="col-10">
-    <input class="form-control" type="text" name="departamento" >
+    {{ form.departamento|attr:"rows:1"|add_class:"form-control"}}
   </div>
 </div>
 <div class="form-group row col-md-4 col-md-offset-4">
   <label  class="col-form-label">Ubicacion de la empresa (dirección)</label>
   <div class="col-10">
-    <input class="form-control" type="text" name="ubicacion" >
+    {{ form.ubicacion|attr:"rows:1"|add_class:"form-control"}}
   </div>
 </div>
 <div class="form-group row col-md-4 col-md-offset-4">
   <label class=" col-form-label">Nombre del Tutor de la Empresa</label>
   <div class="col-10">
-    <input class="form-control" type="text" name="tutor" >
+    {{ form.tutor|attr:"rows:1"|add_class:"form-control"}}
   </div>
 </div>
 <div class="form-group row col-md-4 col-md-offset-4">
-<button type="submit" class="save btn btn-success">Crear</button>
+<button type="submit" class="save btn btn-success">Guardar</button>
 </div>
 </form>
 </div>

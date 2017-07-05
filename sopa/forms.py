@@ -25,6 +25,25 @@ class RegistroForm(UserCreationForm):
             'id_grado': "id_grado",
         }
 
+class EditUsu(forms.ModelForm):
+    
+        class Meta:
+            model = usuarios
+            fields = [
+                'username',
+                'first_name',
+                'last_name',
+                'email',
+                'id_grado',
+            ]
+            labels = {
+                'username': 'Nombre de usuario',
+                'first_name': 'Nombre',
+                'last_name': 'Apellido',
+                'email': "Correo electronico",
+                'id_grado': "id_grado",
+            }
+
 class NuevaEmpresaform(forms.ModelForm):
 
     class Meta:

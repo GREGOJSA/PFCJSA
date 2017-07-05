@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^$', views.home,name='home'),
     url(r'^logout$', logout, name="logout", kwargs={'next_page': '/'}),
     url(r'^new_user$', RegistroUsuario.as_view(), name='nuevo_usuario'),
+    url(r'^usuarios/miperfil/edit/(?P<pk>.+)/$', EditUsuario.as_view(), name='edit_usuario'),
     url(r'^empresas/$', views.lista_empresas, name='lista_empresas'),
     url(r'^empresas/new/$', crearempresa.as_view(), name='nueva_Empresa'),
     url(r'^empresas/edit/(?P<pk>.+)/$', editarempresa.as_view(), name='edita_Empresa'),

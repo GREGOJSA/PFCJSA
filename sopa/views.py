@@ -10,7 +10,7 @@ from django.contrib.auth import login
 from django.contrib import auth
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
-from .forms import BusquedaForm, RegistroForm, NuevaEmpresaform, PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm
+from .forms import EditUsu,BusquedaForm, RegistroForm, NuevaEmpresaform, PreguntasFundamentalesForm, PreguntasBasicasForm, PreguntasOpcionalesForm, PreguntasAnecdoticasForm
 from .models import *
 from django.contrib.auth.decorators import login_required
 from formtools.wizard.views import SessionWizardView
@@ -54,6 +54,33 @@ class RegistroUsuario(CreateView):
         user = self.object
         return response
 
+class EditUsuario(UpdateView):
+    model = usuarios
+    template_name = "sopa/editar_miperfil.html"
+    form_class = EditUsu
+    def get_initial(self, **kwargs):
+        initial = super(EditUsuario, self).get_initial()
+        usu = get_object_or_404(usuarios, username=self.request.user)
+        print usu.username
+        print initial
+        initial['username']=usu.username
+        initial['nombre']=usu.first_name
+        initial['apellido']=usu.last_name
+        initial['id_grado']=usu.id_grado
+        initial['email']=usu.email
+        print initial
+        return initial
+    def form_valid(self, form):
+        usu = get_object_or_404(usuarios, username=self.request.user)
+        print str(usu.pk) + str(usu.username)
+        usu = form.save()
+        if usu:
+            print str(usu.pk) + str(usu.username)
+            print("hola")
+        print("hola2")
+
+        return HttpResponseRedirect("/usuarios/miperfil")
+
 
 def home(request):
     empresa = empresas.objects.all().order_by('-created_date')[:5]
@@ -82,20 +109,24 @@ class editarempresa(UpdateView):
     def get_initial(self, **kwargs):
         initial = super(editarempresa, self).get_initial()
         emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
-        print emp.nombre_empresa
-        print initial
+
         initial['nombre_empresa']=emp.nombre_empresa
         initial['departamento']=emp.departamento
         initial['ubicacion']=emp.ubicacion
         initial['tutor']=emp.tutor
-        print initial
+
         return initial
+
     def form_valid(self, form):
         emp = get_object_or_404(empresas, pk=self.kwargs['pk'])
-        empresa = form.save(commit=False)
-        emp.save()
-        a = emp.pk
-        return HttpResponseRedirect("/empresas/"+str(a))
+        print str(emp.pk) + str(emp.nombre_empresa)
+        emp = form.save()
+        if emp:
+            print str(emp.pk) + str(emp.nombre_empresa)
+            print("hola")
+        print("hola2")
+        a = self.kwargs['pk']
+        return HttpResponseRedirect("/empresas/"+str(a)+"/")
 
 
 def notamedia(e):
@@ -110,7 +141,20 @@ def notamedia(e):
     else:
         media = 0
         empresas.objects.filter(nombre_empresa = e.nombre_empresa, departamento = e.departamento, tutor = e.tutor).update(valoracion = media)
-
+@login_required
+def lista_usuarios(request):
+    usuario = usuarios.objects.all()
+    paginator = Paginator(usuario, 5) # Show 5 contacts per page
+    page = request.GET.get('page')
+    try:
+        usuariol = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        usuariol = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        usuariol = paginator.page(paginator.num_pages)
+    return render(request, 'sopa/lista_alumnos.html', {'titulo': 'SOPA lista usuarios' ,'alumnos' : usuariol})
 
 
 @login_required
@@ -126,7 +170,6 @@ def lista_empresas(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         empresasl = paginator.page(paginator.num_pages)
-
     for x in empresa:
         notamedia(x)
     return render(request, 'sopa/lista_empresas.html', {'titulo': 'SOPA lista empresas' ,'empresas' : empresasl})
@@ -161,7 +204,7 @@ def buscar_empresa(request):
                 aux = ""
             else:
                 aux = "No hay resultados para: "'"' + str(q) + '"'
-            return render(request, 'sopa/buscar_empresas.html', {'empresas' : empresa, 'aux' : aux})
+            return render(request, 'sopa/buscar_empresas.html', {'empresas' : empresa, 'aux' : aux, 'busq' :q})
         else:
             return HttpResponseRedirect('/empresas')
 
@@ -179,7 +222,7 @@ def buscar_encuesta(request):
                 aux = ""
             else:
                 aux = "No hay resultados para: "'"' + str(q) + '"'
-            return render(request, 'sopa/buscar_encuestas.html', {'encuestas' : encuesta, 'aux' : aux})
+            return render(request, 'sopa/buscar_encuestas.html', {'encuestas' : encuesta, 'aux' : aux, 'busq' :q})
         else:
             return HttpResponseRedirect('/encuesta')
 
@@ -198,7 +241,7 @@ def buscar_usuario(request):
                 aux = ""
             else:
                 aux = "No hay resultados para: "'"' + str(q) + '"'
-            return render(request, 'sopa/buscar_usuarios.html', {'usuarios' : alumno, 'aux' : aux})
+            return render(request, 'sopa/buscar_usuarios.html', {'usuarios' : alumno, 'aux' : aux, 'busq' :q})
         else:
             return HttpResponseRedirect('/usuarios')
 
@@ -221,10 +264,7 @@ def miperfil(request):
         opiniones = ""
     return render(request, 'sopa/perfil_usuario.html', {'titulo': 'SOPA Mi perfil' ,'usuario' : usuario, 'grado' : grado, 'opinion' : opiniones, 'aux' : aux})
 
-@login_required
-def lista_usuarios(request):
-    usuario = usuarios.objects.all()
-    return render(request, 'sopa/lista_alumnos.html', {'titulo': 'SOPA lista usuarios' ,'alumnos' : usuario})
+
 
 @login_required
 def detalle_usuario(request, u):
