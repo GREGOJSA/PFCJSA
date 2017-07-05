@@ -29,19 +29,18 @@ class EditUsu(forms.ModelForm):
 
         class Meta:
             model = usuarios
+            exclude = ['username',]
             fields = [
-                'username',
                 'first_name',
                 'last_name',
                 'email',
                 'grado',
             ]
             labels = {
-                'username': 'Nombre de usuario',
-                'first_name': 'Nombre',
-                'last_name': 'Apellido',
+                'first_name': "Nombre",
+                'last_name': "Apellido",
                 'email': "Correo electronico",
-                'grado': "grado",
+                'grado': 'grado',
             }
 
 class NuevaEmpresaform(forms.ModelForm):

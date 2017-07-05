@@ -25,7 +25,7 @@ SECRET_KEY = 'ff)!zmdu2bz$b#q%44(k@v2@epal!=-7@@zsf-ho9rq6)uu7&j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['joelespa.pythonanywhere.com']
+ALLOWED_HOSTS = ['joelespa.pythonanywhere.com','localhost']
 
 
 # Application definition

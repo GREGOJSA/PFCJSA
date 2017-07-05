@@ -51,7 +51,6 @@ class RegistroUsuario(CreateView):
     success_url = reverse_lazy("login")
     def form_valid(self, form, *args, **kwargs):
         response = super(RegistroUsuario, self).form_valid(form, *args, **kwargs)
-        user = self.object
         return response
 
 class EditUsuario(UpdateView):
@@ -61,23 +60,26 @@ class EditUsuario(UpdateView):
     def get_initial(self, **kwargs):
         initial = super(EditUsuario, self).get_initial()
         usu = get_object_or_404(usuarios, username=self.request.user)
-        print usu.username
+        print usu.username + str(usu.pk)
         print initial
-        initial['username']=usu.username
-        initial['nombre']=usu.first_name
-        initial['apellido']=usu.last_name
+        initial['first_name']=usu.first_name
+        initial['last_name']=usu.last_name
         initial['grado']=usu.grado
         initial['email']=usu.email
         print initial
         return initial
     def form_valid(self, form):
+        print("form_valid")
         usu = get_object_or_404(usuarios, username=self.request.user)
-        print str(usu.pk) + str(usu.username)
-        usu = form.save()
+        print ("saco: ")+str(usu.pk) + str(usu.username)
+        usu.first_name = form.cleaned_data['first_name']
+        usu.last_name = form.cleaned_data['last_name']
+        usu.email = form.cleaned_data['email']
+        usu.gado = form.cleaned_data['grado']
+        usu.save()
         if usu:
-            print str(usu.pk) + str(usu.username)
-            print("hola")
-        print("hola2")
+            print ("guardo usu "+str(usu.pk) + str(usu.username))
+
 
         return HttpResponseRedirect("/usuarios/miperfil")
 
