@@ -75,7 +75,7 @@ class EditUsuario(UpdateView):
         usu.first_name = form.cleaned_data['first_name']
         usu.last_name = form.cleaned_data['last_name']
         usu.email = form.cleaned_data['email']
-        usu.gado = form.cleaned_data['grado']
+        usu.grado = form.cleaned_data['grado']
         usu.save()
         if usu:
             print ("guardo usu "+str(usu.pk) + str(usu.username))
