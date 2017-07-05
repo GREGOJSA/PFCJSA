@@ -37,7 +37,30 @@
           </div>
         </div>
         <div class="form-group row col-md-4 col-md-offset-4">
+          <label class=" col-form-label">Titulación:</label>
+          <div class="col-10">
+        <select id="soflow" name="grado" placeholder="grado" class="form-control">
+          <option value="Ing. Sup. De Telecomunicación"{% if "Ing. Sup. De Telecomunicación" == form.grado.value %}selected="selected"{% endif %}>Ing. Sup. De Telecomunicación</option>
+          <option value="Ing. Sup. De Telecomunicación + ADE"{% if "Ing. Sup. De Telecomunicación + ADE" == form.grado.value %}selected="selected"{% endif %}>Ing. Sup. De Telecomunicación + ADE</option>
+          <option value="Ing. Sup. De Telecomunicación Bilingüe"{% if "Ing. Sup. De Telecomunicación Bilingüe" == form.grado.value %}selected="selected"{% endif %}>Ing. Sup. De Telecomunicación Bilingüe</option>
+          <option value="Ing. Aeroespacial en Aeronavegación"{% if "Ing. Aeroespacial en Aeronavegación" == form.grado.value %}selected="selected"{% endif %}>Ing. Aeroespacial en Aeronavegación</option>
+          <option value="Ing. Aeroespacial en Vehículos Aeroespaciales"{% if "Ing. Aeroespacial en Vehículos Aeroespaciales" == form.grado.value %}selected="selected"{% endif %}>Ing. Aeroespacial en Vehículos Aeroespaciales</option>
+          <option value="Ing. Biomédica"{% if "Ing. Biomédica" == form.grado.value %}selected="selected"{% endif %}>Ing. Biomédica</option>
+          <option value="Ing. en Sistemas Audiovisuales y Multimedia"{% if "Ing. en Sistemas Audiovisuales y Multimedia" == form.grado.value %}selected="selected"{% endif %}>Ing. en Sistemas Audiovisuales y Multimedia</option>
+          <option value="Ing. en Sistemas de Telecomunicación"{% if "Ing. en Sistemas de Telecomunicación" == form.grado.value %}selected="selected"{% endif %}>Ing. en Sistemas de Telecomunicación</option>
+          <option value="Ing. en Tecnologías de la Telecomunicación"{% if "Ing. en Tecnologías de la Telecomunicación" == form.grado.value %}selected="selected"{% endif %}>Ing. en Tecnologías de la Telecomunicación</option>
+          <option value="Ing. en Telemática"{% if "Ing. en Telemática" == form.grado.value %}selected="selected"{% endif %}>Ing. en Telemática</option>
+          <option value="Biomedical Engineering"{% if "Biomedical Engineering" == form.grado.value %}selected="selected"{% endif %}>Biomedical Engineering</option>
+          <option value="Ing. En Sistemas Teleco + ADE"{% if "Ing. En Sistemas Teleco + ADE" == form.grado.value %}selected="selected"{% endif %}>Ing. En Sistemas Teleco + ADE</option>
+          <option value="Ing. Del Tecnologías Teleco + ADE"{% if "Ing. Del Tecnologías Teleco + ADE" == form.grado.value %}selected="selected"{% endif %}>Ing. Del Tecnologías Teleco + ADE</option>
+        </select>
+      </div>
+    </div>
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+        <div class="form-group row col-md-4 col-md-offset-4">
         <button type="submit" class="save btn btn-success">Guardar</button>
+        <a href= "/usuarios/miperfil"  class="btn btn-danger" role="button">   cancelar</a>
         </div>
         </form>
     </form>

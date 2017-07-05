@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import empresas, usuarios, encuestas, grados
+from .models import empresas, usuarios, encuestas
 # Register your models here.
 
 class empresasAdmin(admin.ModelAdmin):
@@ -15,12 +15,11 @@ class encuestasAdmin(admin.ModelAdmin):
     search_fields = ('nombre_empresa', 'departamento', 'tutor', 'user')
 
 class usuariosAdmin(admin.ModelAdmin):
-    list_display = ('username', 'first_name', 'last_name')
-    list_filter = ('username', 'first_name', 'last_name')
-    search_fields = ('username', 'first_name', 'last_name')
+    list_display = ('username', 'first_name', 'last_name','grado')
+    list_filter = ('username', 'first_name', 'last_name','grado')
+    search_fields = ('username', 'first_name', 'last_name','grado')
 
 
 admin.site.register(usuarios, usuariosAdmin)
-admin.site.register(grados)
 admin.site.register(empresas, empresasAdmin)
 admin.site.register(encuestas, encuestasAdmin)

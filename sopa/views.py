@@ -66,7 +66,7 @@ class EditUsuario(UpdateView):
         initial['username']=usu.username
         initial['nombre']=usu.first_name
         initial['apellido']=usu.last_name
-        initial['id_grado']=usu.id_grado
+        initial['grado']=usu.grado
         initial['email']=usu.email
         print initial
         return initial
@@ -251,10 +251,6 @@ def buscar_usuario(request):
 @login_required
 def miperfil(request):
     usuario = get_object_or_404(usuarios, username = request.user)
-    try:
-        grado = grados.objects.get(id_grado=usuario.id_grado)
-    except ObjectDoesNotExist:
-        grado = "no especificado"
     op = encuestas.objects.filter(user = usuario.username).order_by('created_date')
     if op:
         aux=""
@@ -262,17 +258,13 @@ def miperfil(request):
     else:
         aux="No he añadido opiniones"
         opiniones = ""
-    return render(request, 'sopa/perfil_usuario.html', {'titulo': 'SOPA Mi perfil' ,'usuario' : usuario, 'grado' : grado, 'opinion' : opiniones, 'aux' : aux})
+    return render(request, 'sopa/perfil_usuario.html', {'titulo': 'SOPA Mi perfil' ,'usuario' : usuario, 'opinion' : opiniones, 'aux' : aux})
 
 
 
 @login_required
 def detalle_usuario(request, u):
     usuario = get_object_or_404(usuarios, username = u)
-    try:
-        grado = grados.objects.get(id_grado=usuario.id_grado)
-    except ObjectDoesNotExist:
-        grado = "no especificado"
     hayopiniones = encuestas.objects.filter(user = usuario)
     if hayopiniones:
         aux=""
@@ -280,7 +272,7 @@ def detalle_usuario(request, u):
     else:
         aux="No ha añadido opiniones"
         opiniones = ""
-    return render(request, 'sopa/detalle_usuario.html', {'titulo': 'Detalle de usuario' ,'usuario' : usuario, 'grado' : grado, 'opiniones' : opiniones, 'aux':aux})
+    return render(request, 'sopa/detalle_usuario.html', {'titulo': 'Detalle de usuario' ,'usuario' : usuario, 'opiniones' : opiniones, 'aux':aux})
 
 @login_required
 def detalle_empresa(request, pk):
